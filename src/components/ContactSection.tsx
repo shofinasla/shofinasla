@@ -183,7 +183,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                       rows={5}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Hi Shofi, I saw your portfolio and would love to discuss a project / role..."
+                      placeholder="Hi Ahmad Shofi, I saw your portfolio and would love to discuss a project / role..."
                       className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 resize-none"
                     />
                   </div>

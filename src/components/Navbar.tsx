@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, FileCode2, Github, Mail, Sparkles, Menu, X, Sun, Moon } from 'lucide-react';
+import { Terminal, FileText, Github, Mail, Sparkles, Menu, X, Sun, Moon } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface NavbarProps {
   profile: ProfileData;
   activeSection: string;
   onNavigate: (sectionId: string) => void;
-  onOpenReadmeEditor: () => void;
+  onOpenResume: () => void;
   onToggleTerminal: () => void;
   isTerminalOpen: boolean;
   theme: 'dark' | 'light';
@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   profile,
   activeSection,
   onNavigate,
-  onOpenReadmeEditor,
+  onOpenResume,
   onToggleTerminal,
   isTerminalOpen,
   theme,
@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       id="main-header"
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-slate-950/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-lg shadow-black/20'
+          ? 'bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-lg shadow-black/20'
           : 'bg-transparent py-5'
       }`}
     >
@@ -58,17 +58,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => onNavigate('about')}
           className="flex items-center gap-3 group focus:outline-none"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 p-[1.5px] shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-200">
-            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-mono font-bold text-indigo-400 text-sm tracking-tighter">
-              &lt;SN/&gt;
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-500 to-cyan-400 p-[1.5px] shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-200">
+            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-mono font-bold text-indigo-400 text-xs tracking-tight">
+              &lt;ASN/&gt;
             </div>
           </div>
           <div className="text-left">
-            <span className="font-bold text-slate-100 text-base tracking-tight block group-hover:text-indigo-300 transition-colors">
-              @{profile.username}
+            <span className="font-bold text-slate-100 text-sm sm:text-base tracking-tight block group-hover:text-indigo-300 transition-colors">
+              {profile.name}
             </span>
-            <span className="text-xs text-slate-400 font-mono hidden sm:block">
-              Full-Stack Developer
+            <span className="text-[11px] text-indigo-400 font-mono flex items-center gap-1">
+              <span>@{profile.username}</span>
+              <span className="text-slate-600">•</span>
+              <span className="text-slate-400 hidden sm:inline">Software Engineer</span>
             </span>
           </div>
         </button>
@@ -93,16 +95,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Actions */}
         <div className="flex items-center gap-2">
-          {/* README Builder Button */}
+          {/* Resume & CV Viewer Button */}
           <button
-            id="btn-readme-builder"
-            onClick={onOpenReadmeEditor}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700/60 text-xs font-medium transition-all duration-200 group"
-            title="Open GitHub Profile README.md Generator"
+            id="btn-resume-modal"
+            onClick={onOpenResume}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-medium transition-all duration-200 group"
+            title="View Ahmad Shofi Nasla's Resume & Bio"
           >
-            <FileCode2 className="w-3.5 h-3.5 text-indigo-400 group-hover:rotate-6 transition-transform" />
-            <span className="hidden sm:inline">README Generator</span>
-            <span className="sm:hidden">README</span>
+            <FileText className="w-3.5 h-3.5 text-indigo-400 group-hover:scale-110 transition-transform" />
+            <span className="hidden sm:inline">Resume / CV</span>
+            <span className="sm:hidden">CV</span>
           </button>
 
           {/* Interactive Terminal Toggle */}
@@ -127,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition-colors"
-            title="GitHub Profile"
+            title="GitHub: @shofinasla"
           >
             <Github className="w-4 h-4" />
           </a>
@@ -147,6 +149,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div id="mobile-menu-drawer" className="md:hidden bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 px-4 py-4 mt-3 space-y-2 animate-fadeIn">
+          <div className="pb-2 mb-2 border-b border-slate-800 text-left px-2">
+            <span className="font-bold text-slate-100 text-sm block">{profile.name}</span>
+            <span className="text-xs text-indigo-400 font-mono">@{profile.username}</span>
+          </div>
           {navItems.map((item) => (
             <button
               key={item.id}

@@ -11,21 +11,22 @@ import {
   ExternalLink,
   Github,
   Linkedin,
-  FileCode2
+  FileText,
+  Cpu
 } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface HeroProps {
   profile: ProfileData;
   onNavigate: (sectionId: string) => void;
-  onOpenReadmeEditor: () => void;
+  onOpenResume: () => void;
   onOpenTerminal: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   profile,
   onNavigate,
-  onOpenReadmeEditor,
+  onOpenResume,
   onOpenTerminal
 }) => {
   const [copied, setCopied] = useState(false);
@@ -47,23 +48,28 @@ export const Hero: React.FC<HeroProps> = ({
           
           {/* Left Column: Bio & Calls to Action */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Status Chip */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>{profile.status}</span>
+            {/* Status & Identity Chip */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span>{profile.status}</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-300">
+                <span>@{profile.username}</span>
+              </div>
             </div>
 
             {/* Main Headline */}
             <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 leading-tight">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">@{profile.username}</span>
+                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">{profile.name}</span>
               </h1>
               <p className="text-lg sm:text-xl font-medium text-slate-300 flex items-center gap-2">
                 <Code2 className="w-5 h-5 text-indigo-400" />
-                {profile.title}
+                <span>{profile.title}</span>
               </p>
             </div>
 
@@ -84,6 +90,12 @@ export const Hero: React.FC<HeroProps> = ({
                   github.com/{profile.username}
                 </a>
               </div>
+              <div className="flex items-center gap-1.5">
+                <Mail className="w-3.5 h-3.5 text-indigo-400" />
+                <a href={`mailto:${profile.email}`} className="hover:text-indigo-300 transition-colors">
+                  {profile.email}
+                </a>
+              </div>
             </div>
 
             {/* Action Buttons */}
@@ -93,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({
                 onClick={() => onNavigate('projects')}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-md shadow-indigo-600/30 hover:shadow-indigo-600/40 transition-all duration-200"
               >
-                <span>View Projects</span>
+                <span>View Featured Projects</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -108,12 +120,12 @@ export const Hero: React.FC<HeroProps> = ({
               </button>
 
               <button
-                id="hero-btn-readme"
-                onClick={onOpenReadmeEditor}
+                id="hero-btn-resume"
+                onClick={onOpenResume}
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-indigo-300 hover:text-indigo-200 border border-indigo-500/30 font-medium text-xs transition-all duration-200"
               >
-                <FileCode2 className="w-3.5 h-3.5 text-indigo-400" />
-                <span>Customize Profile README</span>
+                <FileText className="w-3.5 h-3.5 text-indigo-400" />
+                <span>View Resume & Bio</span>
               </button>
             </div>
           </div>
@@ -132,7 +144,7 @@ export const Hero: React.FC<HeroProps> = ({
                     <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
                     <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
                     <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                    <span className="text-xs text-slate-400 font-mono ml-2">README.md preview</span>
+                    <span className="text-xs text-slate-400 font-mono ml-2">shofinasla/README.md</span>
                   </div>
                   <button 
                     onClick={onOpenTerminal}
@@ -145,14 +157,15 @@ export const Hero: React.FC<HeroProps> = ({
 
                 {/* Markdown snippet representation */}
                 <div className="space-y-3 font-mono text-xs">
-                  <div className="p-3 bg-slate-950/70 rounded-xl border border-slate-800/60 space-y-2 text-slate-300">
+                  <div className="p-3.5 bg-slate-950/70 rounded-xl border border-slate-800/60 space-y-2 text-slate-300">
                     <div className="text-indigo-300 font-semibold flex items-center gap-1.5">
-                      <span>👋 Hi, I’m @{profile.username}</span>
+                      <span>👋 Hi, I’m {profile.name} (@{profile.username})</span>
                     </div>
-                    <div className="text-slate-400 text-[11px] leading-relaxed">
+                    <div className="text-slate-400 text-[11px] leading-relaxed space-y-1">
                       <p><span className="text-emerald-400">🌱 Learning:</span> {profile.learning[0]}</p>
-                      <p><span className="text-purple-400">💞️ Collaborating on:</span> {profile.collaboratingOn[0]}</p>
+                      <p><span className="text-purple-400">💞️ Collaborating:</span> {profile.collaboratingOn[0]}</p>
                       <p><span className="text-cyan-400">📫 Reach out:</span> {profile.email}</p>
+                      <p><span className="text-amber-400">📍 Based in:</span> {profile.location}</p>
                     </div>
                   </div>
 
@@ -164,7 +177,7 @@ export const Hero: React.FC<HeroProps> = ({
                     </div>
                     <div className="bg-slate-950/50 p-2.5 rounded-lg border border-slate-800/40">
                       <span className="text-[10px] text-slate-500 block uppercase font-sans font-medium">Repository</span>
-                      <span className="text-xs font-medium text-slate-200">shofinasla/shofinasla</span>
+                      <span className="text-xs font-medium text-slate-200">{profile.username}/{profile.username}</span>
                     </div>
                   </div>
                 </div>
@@ -178,7 +191,7 @@ export const Hero: React.FC<HeroProps> = ({
                     rel="noreferrer"
                     className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 font-medium"
                   >
-                    <span>View on GitHub</span>
+                    <span>github.com/{profile.username}</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>

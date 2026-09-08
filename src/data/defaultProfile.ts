@@ -2,37 +2,37 @@ import { ProfileData, Project, SkillCategory, ExperienceItem } from '../types';
 
 export const initialProfile: ProfileData = {
   username: 'shofinasla',
-  name: 'Shofi Nasla',
+  name: 'Ahmad Shofi Nasla',
   title: 'Full-Stack Developer & Software Engineer',
-  bio: 'Passionate developer crafting modern, responsive web and mobile applications with clean architecture and delightful user experiences.',
+  bio: 'Software engineer from Indonesia focused on building modern, robust web platforms, high-throughput APIs, and developer tooling. Passionate about clean TypeScript patterns, responsive UI systems, and open-source software.',
   email: 'Shofinasla@gmail.com',
-  location: 'Indonesia / Remote',
-  status: 'Open to exciting opportunities & open-source collaboration',
+  location: 'Indonesia (Remote & Global)',
+  status: 'Open for high-impact engineering roles & open-source collaboration',
   avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
   githubUrl: 'https://github.com/shofinasla',
   linkedinUrl: 'https://linkedin.com/in/shofinasla',
   websiteUrl: 'https://github.com/shofinasla/shofinasla',
   interests: [
-    'Full-Stack Web Development',
-    'Modern React & TypeScript Ecosystems',
-    'Cloud-Native Architectures & Microservices',
-    'UI/UX Design Systems & Motion Design',
-    'Open Source Tooling & Developer Experience'
+    'Full-Stack Web Engineering',
+    'Modern React & TypeScript Architecture',
+    'High-Performance REST & GraphQL APIs',
+    'Design Systems & Accessible UI/UX',
+    'Cloud-Native Solutions & Open-Source Community'
   ],
   learning: [
     'Advanced Next.js App Router & Server Actions',
     'Distributed Systems & Realtime WebSockets',
-    'AI-Assisted Development & Gemini API integrations',
-    'Rust for high-performance backend utilities'
+    'AI-Augmented Workflows & Gemini API',
+    'Rust for high-concurrency tooling'
   ],
   collaboratingOn: [
-    'Open Source Web Applications',
-    'Developer Tooling & Productivity Suites',
-    'Community-driven educational software'
+    'Scalable Web Platforms & SaaS',
+    'Developer Tooling & Interactive UI Kits',
+    'Community-driven educational & open-source software'
   ],
   reachOutFor: [
-    'Full-time & Contract Engineering Roles',
-    'Technical Consultations & Code Reviews',
+    'Full-time & Contract Software Engineering',
+    'Web Architecture & Frontend Consulting',
     'Collaborative Open-Source Initiatives'
   ]
 };
@@ -78,9 +78,9 @@ export const initialProjects: Project[] = [
   },
   {
     id: 'proj-3',
-    title: 'DevScope - GitHub Profile Customizer & Analytics',
+    title: 'DevScope - GitHub Profile Hub & Analytics',
     description: 'Dynamic README generator, contribution heatmaps, and customizable stats cards for GitHub profiles.',
-    fullDescription: 'DevScope allows software engineers to easily compose Markdown templates, generate shields.io badges, preview repo cards, and render dynamic commit visualizers with instant clipboard synchronization.',
+    fullDescription: 'DevScope allows software engineers like @shofinasla to easily compose Markdown templates, generate shields.io badges, preview repo cards, and render dynamic commit visualizers with instant clipboard synchronization.',
     category: 'AI & Tools',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'GitHub API', 'Vite'],
     stars: 128,
@@ -135,13 +135,13 @@ export const initialProjects: Project[] = [
 
 export const initialSkillCategories: SkillCategory[] = [
   {
-    name: 'Frontend Development',
+    name: 'Frontend Engineering',
     icon: 'Layout',
     skills: [
       { name: 'React / Next.js', level: 95, experience: '4+ yrs', featured: true },
-      { name: 'TypeScript', level: 92, experience: '3+ yrs', featured: true },
+      { name: 'TypeScript', level: 93, experience: '3+ yrs', featured: true },
       { name: 'Tailwind CSS', level: 96, experience: '4+ yrs', featured: true },
-      { name: 'HTML5 & Modern CSS', level: 98, experience: '5+ yrs', featured: true },
+      { name: 'HTML5 & Modern CSS/SASS', level: 98, experience: '5+ yrs', featured: true },
       { name: 'State Management (Zustand/Redux)', level: 88, experience: '3+ yrs' },
       { name: 'Responsive & Accessible UI/UX', level: 92, experience: '4+ yrs' }
     ]
@@ -151,20 +151,20 @@ export const initialSkillCategories: SkillCategory[] = [
     icon: 'Server',
     skills: [
       { name: 'Node.js & Express', level: 90, experience: '3+ yrs', featured: true },
-      { name: 'REST & GraphQL APIs', level: 88, experience: '3+ yrs', featured: true },
-      { name: 'PostgreSQL & MySQL', level: 84, experience: '2+ yrs' },
-      { name: 'MongoDB / Prisma ORM', level: 86, experience: '3+ yrs' },
+      { name: 'REST & GraphQL APIs', level: 89, experience: '3+ yrs', featured: true },
+      { name: 'PostgreSQL & MySQL', level: 85, experience: '3+ yrs' },
+      { name: 'MongoDB / Prisma ORM', level: 87, experience: '3+ yrs' },
       { name: 'Authentication & JWT/OAuth', level: 88, experience: '3+ yrs' }
     ]
   },
   {
-    name: 'DevOps, Cloud & Tools',
+    name: 'DevOps, Cloud & Tooling',
     icon: 'Cloud',
     skills: [
-      { name: 'Git & GitHub Workflows', level: 94, experience: '5+ yrs', featured: true },
-      { name: 'Docker & Containerization', level: 80, experience: '2+ yrs' },
-      { name: 'CI/CD Pipelines (GitHub Actions)', level: 82, experience: '2+ yrs' },
-      { name: 'Vite / Webpack / Tooling', level: 90, experience: '3+ yrs' },
+      { name: 'Git & GitHub Workflows', level: 95, experience: '5+ yrs', featured: true },
+      { name: 'Docker & Containerization', level: 82, experience: '2+ yrs' },
+      { name: 'CI/CD Pipelines (GitHub Actions)', level: 84, experience: '2+ yrs' },
+      { name: 'Vite / Webpack / Tooling', level: 92, experience: '3+ yrs' },
       { name: 'Cloud Deployments (Cloud Run/Vercel)', level: 86, experience: '3+ yrs' }
     ]
   }
@@ -176,13 +176,13 @@ export const initialExperience: ExperienceItem[] = [
     role: 'Senior Full-Stack Developer',
     company: 'Tech Solutions & Engineering',
     period: '2024 - Present',
-    location: 'Remote',
+    location: 'Remote / Indonesia',
     type: 'Work',
-    description: 'Leading the development of client-facing modern web platforms and high-throughput dashboard microservices.',
+    description: 'Leading the development of client-facing modern web platforms, component design systems, and high-throughput microservices.',
     achievements: [
-      'Architected end-to-end full-stack applications with sub-100ms response times',
-      'Mentored junior engineers on clean TypeScript patterns, testing, and modern React best practices',
-      'Automated deployment pipelines cutting build-to-release cycles by 40%'
+      'Architected end-to-end full-stack applications with sub-100ms response times and 99.9% uptime',
+      'Mentored engineers on clean TypeScript patterns, unit testing, and modern React best practices',
+      'Automated deployment workflows cutting build-to-release cycles significantly'
     ],
     technologies: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Docker', 'Tailwind CSS']
   },
@@ -191,28 +191,28 @@ export const initialExperience: ExperienceItem[] = [
     role: 'Frontend Software Engineer',
     company: 'Digital Innovation Lab',
     period: '2022 - 2024',
-    location: 'Hybrid',
+    location: 'Indonesia',
     type: 'Work',
-    description: 'Created responsive, accessible single-page web applications and internal design systems.',
+    description: 'Engineered responsive, accessible single-page web applications and unified internal design systems.',
     achievements: [
-      'Built reusable component library utilized across 6 core product repositories',
-      'Increased mobile Lighthouse performance scores from 64 to 98',
+      'Built reusable component libraries utilized across multiple core product repositories',
+      'Elevated Lighthouse performance scores from 64 to 98 through code-splitting and asset optimization',
       'Engineered interactive visualization dashboards handling large tabular datasets'
     ],
     technologies: ['React', 'JavaScript (ES6+)', 'Tailwind CSS', 'Redux', 'REST APIs']
   },
   {
     id: 'exp-3',
-    role: 'Bachelor of Computer Science / Informatics',
+    role: 'Bachelor of Computer Science / Teknik Informatika',
     company: 'University Program',
     period: '2019 - 2023',
-    location: 'Academic Campus',
+    location: 'Indonesia',
     type: 'Education',
     description: 'Specialized in Software Engineering, Algorithms, Database Systems, and Web Technologies.',
     achievements: [
-      'Graduated with honors and distinction in software engineering capstone project',
-      'President of Developer Student Club, hosting hackathons and technical workshops'
+      'Graduated with honors in software engineering capstone research',
+      'Active leadership in Developer Student Club, hosting tech workshops and coding bootcamps'
     ],
-    technologies: ['Algorithms', 'Data Structures', 'Database Design', 'Software Architecture']
+    technologies: ['Algorithms', 'Data Structures', 'Database Systems', 'Software Architecture']
   }
 ];

@@ -7,14 +7,14 @@ import { ExperienceSection } from './components/ExperienceSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { InteractiveTerminal } from './components/InteractiveTerminal';
-import { ReadmeEditorModal } from './components/ReadmeEditorModal';
+import { ResumeModal } from './components/ResumeModal';
 import { initialProfile, initialProjects, initialSkillCategories, initialExperience } from './data/defaultProfile';
 import { ProfileData } from './types';
 
 export function App() {
-  const [profile, setProfile] = useState<ProfileData>(initialProfile);
+  const [profile] = useState<ProfileData>(initialProfile);
   const [activeSection, setActiveSection] = useState<string>('about');
-  const [isReadmeModalOpen, setIsReadmeModalOpen] = useState<boolean>(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState<boolean>(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState<boolean>(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
@@ -34,7 +34,7 @@ export function App() {
         profile={profile}
         activeSection={activeSection}
         onNavigate={scrollToSection}
-        onOpenReadmeEditor={() => setIsReadmeModalOpen(true)}
+        onOpenResume={() => setIsResumeModalOpen(true)}
         onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)}
         isTerminalOpen={isTerminalOpen}
         theme={theme}
@@ -46,7 +46,7 @@ export function App() {
         <Hero
           profile={profile}
           onNavigate={scrollToSection}
-          onOpenReadmeEditor={() => setIsReadmeModalOpen(true)}
+          onOpenResume={() => setIsResumeModalOpen(true)}
           onOpenTerminal={() => setIsTerminalOpen(true)}
         />
 
@@ -74,12 +74,14 @@ export function App() {
         skills={initialSkillCategories}
       />
 
-      {/* Profile README.md Generator Modal */}
-      <ReadmeEditorModal
-        isOpen={isReadmeModalOpen}
-        onClose={() => setIsReadmeModalOpen(false)}
+      {/* Developer Resume & Bio Modal (Read-Only) */}
+      <ResumeModal
+        isOpen={isResumeModalOpen}
+        onClose={() => setIsResumeModalOpen(false)}
         profile={profile}
-        onSaveProfile={(updated) => setProfile(updated)}
+        projects={initialProjects}
+        skills={initialSkillCategories}
+        experience={initialExperience}
       />
 
     </div>

@@ -30,7 +30,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       command: 'welcome',
       output: (
         <div className="space-y-1 text-slate-300">
-          <p className="text-emerald-400 font-bold">✨ Welcome to @{profile.username}'s Interactive Terminal CLI v1.0.0</p>
+          <p className="text-emerald-400 font-bold">✨ Welcome to {profile.name}'s (@{profile.username}) Interactive Terminal CLI</p>
           <p className="text-slate-400 text-xs">Type <span className="text-indigo-300 font-bold">help</span> to list all available commands.</p>
         </div>
       ),
@@ -67,16 +67,27 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <div className="space-y-1 text-xs text-slate-300">
             <p className="text-indigo-400 font-semibold mb-1">Available commands:</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 font-mono">
-              <div><span className="text-emerald-400 font-bold">whoami / bio</span> - About Shofi Nasla</div>
+              <div><span className="text-emerald-400 font-bold">whoami / bio</span> - About {profile.name}</div>
               <div><span className="text-emerald-400 font-bold">projects</span> - List top featured projects</div>
               <div><span className="text-emerald-400 font-bold">skills</span> - List key tech stacks</div>
               <div><span className="text-emerald-400 font-bold">contact</span> - Display email and links</div>
               <div><span className="text-emerald-400 font-bold">cat readme.md</span> - Print profile README</div>
               <div><span className="text-emerald-400 font-bold">socials</span> - GitHub & LinkedIn links</div>
+              <div><span className="text-emerald-400 font-bold">halo / id</span> - Pesan Bahasa Indonesia</div>
               <div><span className="text-emerald-400 font-bold">date</span> - Print current date & time</div>
               <div><span className="text-emerald-400 font-bold">clear</span> - Clear terminal screen</div>
-              <div><span className="text-emerald-400 font-bold">sudo</span> - Secret admin prompt</div>
             </div>
+          </div>
+        );
+        break;
+
+      case 'halo':
+      case 'id':
+        output = (
+          <div className="space-y-1 text-xs text-slate-300">
+            <p className="text-emerald-400 font-bold">🇮🇩 Halo dari Indonesia!</p>
+            <p>Saya <span className="text-indigo-300 font-semibold">Ahmad Shofi Nasla (@shofinasla)</span>, seorang Full-Stack Developer & Software Engineer.</p>
+            <p className="text-slate-400 text-[11px]">Terbuka untuk kolaborasi proyek, peluang rekayasa perangkat lunak, dan kontribusi open source!</p>
           </div>
         );
         break;
@@ -85,11 +96,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       case 'bio':
         output = (
           <div className="space-y-1 text-xs text-slate-300">
-            <p><span className="text-indigo-400 font-bold">Name:</span> {profile.name} (@{profile.username})</p>
+            <p><span className="text-indigo-400 font-bold">Full Name:</span> {profile.name}</p>
+            <p><span className="text-indigo-400 font-bold">GitHub:</span> @{profile.username}</p>
             <p><span className="text-indigo-400 font-bold">Title:</span> {profile.title}</p>
             <p><span className="text-indigo-400 font-bold">Location:</span> {profile.location}</p>
             <p><span className="text-indigo-400 font-bold">Status:</span> {profile.status}</p>
-            <p className="text-slate-400 pt-1">{profile.bio}</p>
+            <p className="text-slate-400 pt-1 leading-relaxed">{profile.bio}</p>
           </div>
         );
         break;
@@ -97,7 +109,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       case 'projects':
         output = (
           <div className="space-y-2 text-xs text-slate-300">
-            <p className="text-indigo-400 font-bold">Featured Projects:</p>
+            <p className="text-indigo-400 font-bold">Featured Projects by {profile.name}:</p>
             {projects.slice(0, 3).map((p) => (
               <div key={p.id} className="p-2 bg-slate-950/60 rounded border border-slate-800">
                 <p className="font-semibold text-emerald-400">{p.title} <span className="text-[10px] text-slate-400">({p.category})</span></p>
@@ -126,6 +138,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       case 'contact':
         output = (
           <div className="space-y-1 text-xs text-slate-300">
+            <p><span className="text-indigo-400 font-bold">Developer:</span> {profile.name} (@{profile.username})</p>
             <p><span className="text-indigo-400 font-bold">Email:</span> {profile.email}</p>
             <p><span className="text-indigo-400 font-bold">GitHub:</span> {profile.githubUrl}</p>
             <p><span className="text-indigo-400 font-bold">LinkedIn:</span> {profile.linkedinUrl}</p>
@@ -138,7 +151,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
           <div className="space-y-1 text-xs text-slate-300">
             <p>🔗 <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">GitHub (@{profile.username})</a></p>
             <p>🔗 <a href={profile.linkedinUrl} target="_blank" rel="noreferrer" className="text-indigo-400 hover:underline">LinkedIn Profile</a></p>
-            <p>📧 <a href={`mailto:${profile.email}`} className="text-emerald-400 hover:underline">Email Direct</a></p>
+            <p>📧 <a href={`mailto:${profile.email}`} className="text-emerald-400 hover:underline">Email Direct ({profile.email})</a></p>
           </div>
         );
         break;
@@ -147,12 +160,13 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
       case 'cat readme':
         output = (
           <div className="p-2.5 bg-slate-950/80 rounded border border-slate-800 font-mono text-[11px] space-y-1 text-slate-300">
-            <p className="text-indigo-300 font-bold"># {profile.name} (@{profile.username})</p>
-            <p>- 👋 Hi, I'm @{profile.username}</p>
+            <p className="text-indigo-300 font-bold"># 👋 Hi, I'm {profile.name} (@{profile.username})</p>
+            <p>- 🚀 {profile.title}</p>
             <p>- 👀 I'm interested in {profile.interests.slice(0, 2).join(', ')}</p>
             <p>- 🌱 I'm currently learning {profile.learning.slice(0, 2).join(', ')}</p>
             <p>- 💞️ I'm looking to collaborate on {profile.collaboratingOn[0]}</p>
             <p>- 📫 How to reach me: {profile.email}</p>
+            <p>- 📍 Based in: {profile.location}</p>
           </div>
         );
         break;
@@ -162,7 +176,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
         break;
 
       case 'sudo':
-        output = <p className="text-xs text-rose-400 font-mono">User @{profile.username} is already root. Access granted with full superuser privileges!</p>;
+        output = <p className="text-xs text-slate-400 font-mono">Access notice: Administrative mode is disabled. You are browsing the public portfolio of {profile.name}.</p>;
         break;
 
       case 'clear':

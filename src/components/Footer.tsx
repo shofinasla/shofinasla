@@ -18,15 +18,15 @@ export const Footer: React.FC<FooterProps> = ({ profile, onOpenTerminal }) => {
         
         {/* Left info */}
         <div className="flex items-center gap-3 text-left">
-          <div className="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center font-mono font-bold text-indigo-400 text-xs">
-            SN
+          <div className="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center font-mono font-bold text-indigo-400 text-xs tracking-tight">
+            ASN
           </div>
           <div>
             <p className="font-bold text-slate-200">
-              {profile.name} (@{profile.username})
+              {profile.name} <span className="text-indigo-400 font-mono text-[11px]">(@{profile.username})</span>
             </p>
             <p className="text-[11px] text-slate-500 font-mono">
-              Designed & Built with React & Tailwind CSS
+              Full-Stack Software Engineer • Indonesia / Remote
             </p>
           </div>
         </div>
@@ -40,6 +40,12 @@ export const Footer: React.FC<FooterProps> = ({ profile, onOpenTerminal }) => {
             className="hover:text-indigo-400 transition-colors"
           >
             github.com/{profile.username}
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            className="hover:text-indigo-400 transition-colors"
+          >
+            {profile.email}
           </a>
           <button
             onClick={onOpenTerminal}

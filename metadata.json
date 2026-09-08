@@ -1,0 +1,8 @@
+{
+  "name": "Shofinasla Portfolio & Profile Hub",
+  "description": "Interactive developer portfolio, GitHub profile builder, and project showcase for @shofinasla.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

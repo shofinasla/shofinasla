@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { 
   FolderGit2, 
   ExternalLink, 
@@ -35,6 +35,17 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
       return matchesCategory && matchesSearch;
     });
   }, [projects, selectedCategory, searchQuery]);
+
+  useEffect(() => {
+    if (!activeModalProject) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActiveModalProject(null);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [activeModalProject]);
 
   return (
     <section id="projects" className="py-20 relative">
@@ -126,13 +137,15 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
 
                   {/* Title & Description */}
                   <div>
-                    <h3 
+                    <button
+                      type="button"
                       onClick={() => setActiveModalProject(project)}
-                      className="text-lg font-bold text-slate-100 group-hover:text-indigo-300 transition-colors cursor-pointer flex items-center justify-between"
+                      className="w-full text-left text-lg font-bold text-slate-100 group-hover:text-indigo-300 transition-colors cursor-pointer flex items-center justify-between"
+                      aria-label={`View details for ${project.title}`}
                     >
                       <span>{project.title}</span>
                       <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                    </h3>
+                    </button>
                     <p className="text-slate-400 text-xs mt-2 line-clamp-3 leading-relaxed">
                       {project.description}
                     </p>
@@ -206,12 +219,16 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
 
       {/* Project Detail Modal */}
       {activeModalProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn" role="presentation" onMouseDown={(event) => {
+          if (event.target === event.currentTarget) setActiveModalProject(null);
+        }}>
+          <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
             {/* Modal close */}
             <button
+              type="button"
               onClick={() => setActiveModalProject(null)}
               className="absolute top-5 right-5 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+              aria-label="Close project details"
             >
               <X className="w-4 h-4" />
             </button>
@@ -226,7 +243,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                   Released {activeModalProject.date}
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-slate-100">
+              <h3 id="project-modal-title" className="text-2xl font-bold text-slate-100">
                 {activeModalProject.title}
               </h3>
             </div>

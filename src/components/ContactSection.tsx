@@ -152,8 +152,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-400">Your Name *</label>
+                      <label htmlFor="contact-name" className="text-xs font-mono text-slate-400">Your Name *</label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
                         value={senderName}
@@ -164,8 +165,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-slate-400">Your Email *</label>
+                      <label htmlFor="contact-email" className="text-xs font-mono text-slate-400">Your Email *</label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
                         value={senderEmail}
@@ -177,8 +179,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-slate-400">Your Message *</label>
+                    <label htmlFor="contact-message" className="text-xs font-mono text-slate-400">Your Message *</label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={5}
                       value={message}

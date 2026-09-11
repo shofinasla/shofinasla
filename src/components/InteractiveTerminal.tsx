@@ -48,6 +48,17 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -214,7 +225,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
   };
 
   return (
-    <div className="fixed inset-x-4 bottom-4 md:inset-x-auto md:right-8 md:bottom-8 z-50 animate-fadeIn">
+    <div className="fixed inset-x-4 bottom-4 md:inset-x-auto md:right-8 md:bottom-8 z-50 animate-fadeIn" role="dialog" aria-modal="true" aria-labelledby="terminal-title">
       <div
         className={`bg-slate-950/95 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 ${
           isExpanded ? 'w-full md:w-[700px] h-[550px]' : 'w-full md:w-[500px] h-[360px]'
@@ -226,7 +237,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             <button onClick={onClose} className="w-3 h-3 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-colors" title="Close" />
             <button onClick={() => setHistory([])} className="w-3 h-3 rounded-full bg-amber-500/80 hover:bg-amber-500 transition-colors" title="Clear" />
             <button onClick={() => setIsExpanded(!isExpanded)} className="w-3 h-3 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-colors" title="Resize" />
-            <span className="text-xs font-mono text-slate-400 ml-2 flex items-center gap-1.5">
+              <span id="terminal-title" className="text-xs font-mono text-slate-400 ml-2 flex items-center gap-1.5">
               <TerminalIcon className="w-3.5 h-3.5 text-indigo-400" />
               <span>shofinasla@portfolio: ~</span>
             </span>
@@ -277,10 +288,12 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type 'help' for commands..."
+            aria-label="Terminal command input"
             className="flex-1 bg-transparent text-slate-100 placeholder-slate-600 focus:outline-none"
             autoFocus
           />
           <button
+            type="button"
             onClick={() => {
               if (inputVal.trim()) {
                 handleCommand(inputVal);
@@ -288,6 +301,7 @@ export const InteractiveTerminal: React.FC<InteractiveTerminalProps> = ({
               }
             }}
             className="p-1 rounded text-slate-500 hover:text-indigo-400 transition-colors"
+            aria-label="Run terminal command"
           >
             <CornerDownLeft className="w-3.5 h-3.5" />
           </button>

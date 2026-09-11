@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Send, CheckCircle, Copy, Check, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Mail, Github, Linkedin, Send, CheckCircle, Copy, Check, MessageSquare, ArrowUpRight, Clock3, Sparkles } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface ContactSectionProps {
@@ -24,7 +24,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
     if (!senderName || !senderEmail || !message) return;
     
     // Create mailto link fallback
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${senderName}`);
+    const subject = encodeURIComponent(`Konsultasi Website dari ${senderName}`);
     const body = encodeURIComponent(`Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${message}`);
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
 
@@ -39,13 +39,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
         <div className="space-y-3 text-left mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono">
             <Mail className="w-3.5 h-3.5" />
-            <span>GET IN TOUCH</span>
+            <span>SIAP MEMULAI?</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-            Let's Collaborate & Build
+            Mari bangun website yang membantu bisnis Anda tumbuh.
           </h2>
           <p className="text-slate-400 text-sm sm:text-base max-w-xl">
-            Whether you have an inquiry, open-source collaboration idea, project contract, or just want to say hi — feel free to drop a message!
+            Ceritakan kebutuhan Anda. Saya akan membantu menerjemahkan ide, masalah, atau target bisnis menjadi solusi website yang jelas dan terukur.
           </p>
         </div>
 
@@ -58,11 +58,24 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
               
               <div className="space-y-2">
                 <h3 className="text-xl font-bold text-slate-100">
-                  Direct Contacts & Channels
+                  Mulai dengan percakapan singkat
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Available for full-stack engineering roles, freelance opportunities, and open source development.
+                  Konsultasikan kebutuhan website Anda tanpa komitmen. Jelaskan tujuan, fitur yang dibutuhkan, atau website lama yang ingin dikembangkan.
                 </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                  <Clock3 className="mb-2 h-4 w-4 text-indigo-400" />
+                  <p className="text-[11px] font-semibold text-slate-200">Respon cepat</p>
+                  <p className="mt-1 text-[10px] leading-relaxed text-slate-500">Saya akan membalas secepatnya.</p>
+                </div>
+                <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                  <Sparkles className="mb-2 h-4 w-4 text-emerald-400" />
+                  <p className="text-[11px] font-semibold text-slate-200">Solusi terarah</p>
+                  <p className="mt-1 text-[10px] leading-relaxed text-slate-500">Fokus pada kebutuhan bisnis.</p>
+                </div>
               </div>
 
               {/* Email badge */}
@@ -147,7 +160,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <h3 className="text-xl font-bold text-slate-100 mb-2">
-                    Send a Direct Note
+                    Ceritakan kebutuhan website Anda
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -159,7 +172,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                         required
                         value={senderName}
                         onChange={(e) => setSenderName(e.target.value)}
-                        placeholder="Ada Lovelace"
+                        placeholder="Nama Anda"
                         className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500"
                       />
                     </div>
@@ -172,7 +185,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                         required
                         value={senderEmail}
                         onChange={(e) => setSenderEmail(e.target.value)}
-                        placeholder="ada@example.com"
+                        placeholder="email@anda.com"
                         className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500"
                       />
                     </div>
@@ -186,7 +199,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                       rows={5}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Hi Ahmad Shofi, I saw your portfolio and would love to discuss a project / role..."
+                      placeholder="Saya ingin membuat website untuk..."
                       className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 resize-none"
                     />
                   </div>
@@ -197,7 +210,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs shadow-md shadow-indigo-600/30 transition-all duration-200"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    <span>Send Message</span>
+                    <span>Kirim untuk Konsultasi</span>
                   </button>
                 </form>
               )}

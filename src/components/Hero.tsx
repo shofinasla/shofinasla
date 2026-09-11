@@ -65,17 +65,17 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Main Headline */}
             <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 leading-tight">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">{profile.name}</span>
+                Saya membantu Anda memiliki <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">website profesional</span> yang berkembang bersama bisnis.
               </h1>
               <p className="text-lg sm:text-xl font-medium text-slate-300 flex items-center gap-2">
                 <Code2 className="w-5 h-5 text-indigo-400" />
-                <span>{profile.title}</span>
+                <span>{profile.name} · {profile.title}</span>
               </p>
             </div>
 
             {/* Bio paragraph */}
             <p className="text-slate-400 text-base leading-relaxed max-w-2xl">
-              {profile.bio}
+              Saya merancang dan membangun website modern untuk membantu bisnis, profesional, dan organisasi tampil lebih kredibel, menjangkau lebih banyak orang, dan mendapatkan peluang baru.
             </p>
 
             {/* Quick Metadata list */}
@@ -105,8 +105,17 @@ export const Hero: React.FC<HeroProps> = ({
                 onClick={() => onNavigate('projects')}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-md shadow-indigo-600/30 hover:shadow-indigo-600/40 transition-all duration-200"
               >
-                <span>View Featured Projects</span>
+                <span>Lihat Layanan Saya</span>
                 <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                id="hero-btn-consultation"
+                onClick={() => onNavigate('contact')}
+                className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-md shadow-emerald-500/20 transition-all duration-200 hover:bg-emerald-400"
+              >
+                <Mail className="h-4 w-4" />
+                <span>Konsultasi Gratis</span>
               </button>
 
               <button

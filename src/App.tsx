@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { ServicesSection } from './components/ServicesSection';
 import { ProjectShowcase } from './components/ProjectShowcase';
 import { SkillsSection } from './components/SkillsSection';
 import { ExperienceSection } from './components/ExperienceSection';
@@ -19,7 +20,7 @@ export function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
-    const sections = ['about', 'projects', 'skills', 'experience', 'contact']
+    const sections = ['about', 'services', 'projects', 'skills', 'experience', 'contact']
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
 
@@ -71,6 +72,8 @@ export function App() {
           onOpenResume={() => setIsResumeModalOpen(true)}
           onOpenTerminal={() => setIsTerminalOpen(true)}
         />
+
+        <ServicesSection onNavigate={scrollToSection} />
 
         <ProjectShowcase projects={initialProjects} />
 

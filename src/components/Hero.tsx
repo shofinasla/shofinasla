@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   Sparkles, 
   MapPin, 
@@ -30,6 +30,53 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenTerminal
 }) => {
   const [copied, setCopied] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+
+  const slides = [
+    {
+      eyebrow: 'WEBSITE UNTUK BISNIS YANG INGIN TUMBUH',
+      title: <>Saya membantu Anda memiliki <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">website profesional</span> yang berkembang bersama bisnis.</>,
+      description: 'Saya merancang dan membangun website modern untuk membantu bisnis tampil lebih kredibel, menjangkau lebih banyak orang, dan mendapatkan peluang baru.',
+      primaryAction: 'Lihat Layanan Saya'
+    },
+    {
+      eyebrow: 'UBAH PENGUNJUNG MENJADI PELANGGAN',
+      title: <>Website yang bukan hanya indah, tetapi juga <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-indigo-400">mendukung hasil bisnis.</span></>,
+      description: 'Bangun landing page atau website company profile dengan pesan yang jelas, struktur yang meyakinkan, dan pengalaman pengguna yang nyaman.',
+      primaryAction: 'Mulai Konsultasi'
+    },
+    {
+      eyebrow: 'DIBANGUN SESUAI KEBUTUHAN ANDA',
+      title: <>Punya ide? Mari wujudkan menjadi <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-indigo-300 to-purple-400">produk digital.</span></>,
+      description: 'Dari konsep awal sampai siap online, saya membantu Anda membangun website yang cepat, responsive, dan mudah dikembangkan.',
+      primaryAction: 'Diskusikan Ide Anda'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slides.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [slides.length]);
+
+  const changeSlide = (direction: number) => {
+    setActiveSlide((current) => (current + direction + slides.length) % slides.length);
+  };
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+
+    const distance = event.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(distance) > 50) changeSlide(distance < 0 ? 1 : -1);
+    touchStartX.current = null;
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(profile.email);
@@ -38,7 +85,13 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section id="about" className="relative pt-32 pb-20 overflow-hidden">
+    <section
+      id="about"
+      className="relative overflow-hidden pt-32 pb-20"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      aria-label="Layanan pembuatan website"
+    >
       {/* Background Decorative Gradients */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-[300px] h-[250px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -47,7 +100,7 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Bio & Calls to Action */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-6 text-left" aria-live="polite">
             {/* Status & Identity Chip */}
             <div className="flex flex-wrap items-center gap-2.5">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono shadow-sm">
@@ -63,9 +116,12 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Main Headline */}
-            <div className="space-y-2">
+            <div key={activeSlide} className="space-y-2 animate-fadeIn">
+              <p className="mb-3 text-xs font-mono font-semibold tracking-wider text-indigo-300">
+                {slides[activeSlide].eyebrow}
+              </p>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 leading-tight">
-                Saya membantu Anda memiliki <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">website profesional</span> yang berkembang bersama bisnis.
+                {slides[activeSlide].title}
               </h1>
               <p className="text-lg sm:text-xl font-medium text-slate-300 flex items-center gap-2">
                 <Code2 className="w-5 h-5 text-indigo-400" />
@@ -75,7 +131,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Bio paragraph */}
             <p className="text-slate-400 text-base leading-relaxed max-w-2xl">
-              Saya merancang dan membangun website modern untuk membantu bisnis, profesional, dan organisasi tampil lebih kredibel, menjangkau lebih banyak orang, dan mendapatkan peluang baru.
+              {slides[activeSlide].description}
             </p>
 
             {/* Quick Metadata list */}
@@ -102,10 +158,10 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="flex flex-wrap items-center gap-3 pt-4">
               <button
                 id="hero-btn-explore-projects"
-                onClick={() => onNavigate('projects')}
+                onClick={() => onNavigate(activeSlide === 0 ? 'services' : 'contact')}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-md shadow-indigo-600/30 hover:shadow-indigo-600/40 transition-all duration-200"
               >
-                <span>Lihat Layanan Saya</span>
+                <span>{slides[activeSlide].primaryAction}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -136,6 +192,39 @@ export const Hero: React.FC<HeroProps> = ({
                 <FileText className="w-3.5 h-3.5 text-indigo-400" />
                 <span>View Resume & Bio</span>
               </button>
+            </div>
+
+            <div className="flex items-center gap-3 pt-1" aria-label="Kontrol slider">
+              <button
+                type="button"
+                onClick={() => changeSlide(-1)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-300 transition-colors hover:border-indigo-400 hover:text-white"
+                aria-label="Slide sebelumnya"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" />
+              </button>
+              <div className="flex items-center gap-1.5" role="tablist" aria-label="Pilih slide">
+                {slides.map((slide, index) => (
+                  <button
+                    key={slide.eyebrow}
+                    type="button"
+                    onClick={() => setActiveSlide(index)}
+                    className={`h-1.5 rounded-full transition-all ${index === activeSlide ? 'w-8 bg-indigo-400' : 'w-2 bg-slate-700 hover:bg-slate-500'}`}
+                    role="tab"
+                    aria-selected={index === activeSlide}
+                    aria-label={`Tampilkan slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => changeSlide(1)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-300 transition-colors hover:border-indigo-400 hover:text-white"
+                aria-label="Slide berikutnya"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+              <span className="text-[11px] font-mono text-slate-500">Geser untuk melihat</span>
             </div>
           </div>
 

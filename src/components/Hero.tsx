@@ -31,6 +31,7 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [profileImageFailed, setProfileImageFailed] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   const slides = [
@@ -251,6 +252,26 @@ export const Hero: React.FC<HeroProps> = ({
                     <Terminal className="w-3 h-3" />
                     <span>Launch CLI</span>
                   </button>
+                </div>
+
+                <div className="flex items-center gap-4 border-b border-slate-800/80 pb-5">
+                  <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-indigo-400/40 bg-gradient-to-br from-indigo-500/30 to-cyan-400/20 text-lg font-bold text-indigo-200 shadow-lg shadow-indigo-500/10">
+                    {!profileImageFailed && (
+                      <img
+                        src={profile.avatarUrl}
+                        alt={`Foto profil ${profile.name}`}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        onError={() => setProfileImageFailed(true)}
+                      />
+                    )}
+                    <span aria-hidden="true">ASN</span>
+                  </div>
+                  <div className="min-w-0 text-left">
+                    <p className="text-sm font-bold text-slate-100">{profile.name}</p>
+                    <p className="mt-1 text-[11px] leading-relaxed text-slate-400">
+                      Pemilik &amp; developer website ini
+                    </p>
+                  </div>
                 </div>
 
                 {/* Markdown snippet representation */}

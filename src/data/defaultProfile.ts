@@ -8,7 +8,7 @@ export const initialProfile: ProfileData = {
   email: 'Shofinasla@gmail.com',
   location: 'Indonesia (Remote & Global)',
   status: 'Open for high-impact engineering roles & open-source collaboration',
-  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+  avatarUrl: '/profile.png',
   githubUrl: 'https://github.com/shofinasla',
   linkedinUrl: 'https://linkedin.com/in/shofinasla',
   websiteUrl: 'https://github.com/shofinasla/shofinasla',

@@ -19,6 +19,10 @@ export default {
         <loc>https://ahmad.shofinasla.workers.dev/</loc>
         <lastmod>${today}</lastmod>
       </url>
+      <url>
+        <loc>https://ahmad.shofinasla.workers.dev/about</loc>
+        <lastmod>${today}</lastmod>
+      </url>
     </urlset>`.trim();
 
       return new Response(sitemapXML, {

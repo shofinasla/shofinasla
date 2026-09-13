@@ -45,17 +45,17 @@ export const WhyChooseMeSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-slate-950 relative border-b border-slate-900">
+    <section className="py-20 bg-[#070b16] relative border-b border-sky-950/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="max-w-3xl text-left space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-mono">
             <Sparkles className="w-3.5 h-3.5" />
             <span>NILAI LEBIH & DEDIKASI</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Kenapa Bekerja Sama dengan Ahmad Shofi Nasla?
           </h2>
 
@@ -71,17 +71,17 @@ export const WhyChooseMeSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 space-y-3 hover:border-slate-700 transition-colors"
+                className="rounded-2xl border border-sky-950/80 bg-[#0a0f1e]/80 p-6 space-y-3 hover:border-sky-800/60 transition-colors shadow-lg"
               >
-                <div className="w-10 h-10 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-indigo-400">
+                <div className="w-10 h-10 rounded-xl bg-[#060913] border border-sky-900/40 flex items-center justify-center text-sky-400 shadow-sm">
                   <Icon className="w-5 h-5" />
                 </div>
 
-                <h3 className="text-base font-bold text-slate-100">
+                <h3 className="text-base font-bold text-white">
                   {item.title}
                 </h3>
 
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {item.desc}
                 </p>
               </div>

@@ -8,17 +8,17 @@ interface TestimonialsSectionProps {
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials }) => {
   return (
-    <section className="py-20 bg-slate-950 relative border-b border-slate-900">
+    <section className="py-20 bg-[#070b16] relative border-b border-sky-950/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="max-w-3xl text-left space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono">
-            <Star className="w-3.5 h-3.5 fill-amber-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-mono">
+            <Star className="w-3.5 h-3.5 fill-sky-400 text-sky-400" />
             <span>TESTIMONI & KEPUASAN KLIEN</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Apa Kata Klien yang Pernah Bekerja Sama?
           </h2>
 
@@ -32,31 +32,31 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testim
           {testimonials.map((item) => (
             <article
               key={item.id}
-              className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 flex flex-col justify-between space-y-6 hover:border-slate-700 transition-colors"
+              className="rounded-2xl border border-sky-950/80 bg-[#0a0f1e]/80 p-6 flex flex-col justify-between space-y-6 hover:border-sky-800/60 transition-colors shadow-lg"
             >
               <div className="space-y-4">
                 {/* Rating stars */}
-                <div className="flex items-center gap-1 text-amber-400">
+                <div className="flex items-center gap-1 text-sky-400">
                   {[...Array(item.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
+                    <Star key={i} className="w-4 h-4 fill-sky-400 text-sky-400" />
                   ))}
                 </div>
 
-                <Quote className="w-6 h-6 text-slate-600 opacity-60" />
+                <Quote className="w-6 h-6 text-sky-500/40" />
 
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
                   "{item.text}"
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-slate-800/80">
-                <span className="text-sm font-bold text-slate-100 block">
+              <div className="pt-4 border-t border-sky-950">
+                <span className="text-sm font-bold text-white block">
                   {item.company}
                 </span>
-                <span className="text-xs text-indigo-400 block mt-0.5">
+                <span className="text-xs text-sky-400 block mt-0.5 font-medium">
                   {item.clientName} • {item.role}
                 </span>
-                <span className="text-[10px] text-slate-500 font-mono block mt-1">
+                <span className="text-[10px] text-slate-400 font-mono block mt-1">
                   Proyek: {item.projectType}
                 </span>
               </div>

@@ -51,17 +51,17 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   ];
 
   return (
-    <section id="process" className="py-20 bg-slate-900/30 relative border-b border-slate-900">
+    <section id="process" className="py-20 bg-[#060913] relative border-b border-sky-950/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="max-w-3xl text-left space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-mono">
             <Clock className="w-3.5 h-3.5" />
             <span>ALUR PENGERJAAN TRANSPARAN</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Dari Ide Awal Sampai Website Siap Digunakan Menghasilkan Transaksi.
           </h2>
 
@@ -75,33 +75,33 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           {steps.map((s, idx) => (
             <div
               key={idx}
-              className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 flex flex-col justify-between text-left relative hover:border-slate-700 transition-colors"
+              className="rounded-2xl border border-sky-950/80 bg-[#0a0f1e]/80 p-6 flex flex-col justify-between text-left relative hover:border-sky-800/60 transition-colors shadow-lg"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-black font-mono text-indigo-400">
+                  <span className="text-2xl font-black font-mono text-sky-400">
                     {s.step}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-400">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#060913] border border-sky-900/40 text-[10px] font-mono text-sky-300/80">
                     {s.timing}
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-slate-100">
+                <h3 className="text-base font-bold text-white">
                   {s.title}
                 </h3>
 
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {s.desc}
                 </p>
 
-                <div className="pt-2 border-t border-slate-800/80 space-y-1.5">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block font-semibold">
+                <div className="pt-2 border-t border-sky-950 space-y-1.5">
+                  <span className="text-[10px] font-mono uppercase text-sky-400 block font-semibold">
                     Output:
                   </span>
                   {s.deliverables.map((d, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-1.5 text-[11px] text-slate-300">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0 mt-0.5" />
+                    <div key={dIdx} className="flex items-start gap-1.5 text-[11px] text-slate-200">
+                      <CheckCircle2 className="w-3 h-3 text-sky-400 shrink-0 mt-0.5" />
                       <span>{d}</span>
                     </div>
                   ))}
@@ -117,9 +117,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-emerald-500/20"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-400 to-blue-600 hover:from-sky-300 hover:to-blue-500 text-slate-950 font-bold text-xs transition-colors shadow-lg shadow-sky-500/25"
           >
-            <Rocket className="w-4 h-4" />
+            <Rocket className="w-4 h-4 text-slate-950" />
             <span>Mulai Langkah Pertama: Konsultasi Gratis Sekarang</span>
           </a>
         </div>

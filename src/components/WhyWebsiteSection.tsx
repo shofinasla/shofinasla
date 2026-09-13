@@ -45,17 +45,17 @@ export const WhyWebsiteSection: React.FC<WhyWebsiteSectionProps> = ({
   ];
 
   return (
-    <section id="why-website" className="py-20 bg-slate-900/40 relative border-b border-slate-900">
+    <section id="why-website" className="py-20 bg-[#060913] relative border-b border-sky-950/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl text-left space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-mono">
-            <AlertTriangle className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-mono">
+            <AlertTriangle className="w-3.5 h-3.5 text-sky-400" />
             <span>REALITAS BISNIS MODERN</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Website Bukan Sekadar Biaya Pajangan, Tapi Investasi Pertumbuhan Bisnis.
           </h2>
 
@@ -69,7 +69,7 @@ export const WhyWebsiteSection: React.FC<WhyWebsiteSectionProps> = ({
           {painPoints.map((item, idx) => (
             <div
               key={idx}
-              className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 space-y-5 text-left hover:border-slate-700 transition-colors"
+              className="rounded-2xl border border-sky-950/80 bg-[#0a0f1e]/80 p-6 space-y-5 text-left hover:border-sky-800/60 transition-colors shadow-lg"
             >
               {/* Problem side */}
               <div className="space-y-2 border-l-2 border-red-500/60 pl-3">
@@ -77,7 +77,7 @@ export const WhyWebsiteSection: React.FC<WhyWebsiteSectionProps> = ({
                   <TrendingDown className="w-3.5 h-3.5" />
                   <span>Tanpa Website:</span>
                 </span>
-                <h3 className="text-base font-bold text-slate-200">
+                <h3 className="text-base font-bold text-slate-100">
                   {item.problem}
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
@@ -86,10 +86,10 @@ export const WhyWebsiteSection: React.FC<WhyWebsiteSectionProps> = ({
               </div>
 
               {/* Solution side */}
-              <div className="space-y-2 border-l-2 border-emerald-500/80 pl-3 pt-2">
-                <span className="text-[11px] font-mono text-emerald-400 uppercase font-bold flex items-center gap-1.5">
+              <div className="space-y-2 border-l-2 border-[#00A3FF] pl-3 pt-2">
+                <span className="text-[11px] font-mono text-sky-400 uppercase font-bold flex items-center gap-1.5">
                   <TrendingUp className="w-3.5 h-3.5" />
-                  <span>Dengan Solusi Website Saya:</span>
+                  <span>Dengan Solusi Website ASN:</span>
                 </span>
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
                   {item.solution}
@@ -100,12 +100,12 @@ export const WhyWebsiteSection: React.FC<WhyWebsiteSectionProps> = ({
         </div>
 
         {/* CTA Banner */}
-        <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6 text-left">
+        <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-[#090e1c] border border-sky-900/40 flex flex-col sm:flex-row items-center justify-between gap-6 text-left shadow-lg">
           <div className="space-y-1.5">
-            <h4 className="text-base sm:text-lg font-bold text-slate-100">
+            <h4 className="text-base sm:text-lg font-bold text-white">
               Jangan Biarkan Kompetitor Merebut Calon Pelanggan Anda.
             </h4>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-300">
               Mulai bangun aset digital bisnis Anda sekarang dengan panduan langsung dari web developer profesional.
             </p>
           </div>
@@ -114,9 +114,9 @@ export const WhyWebsiteSection: React.FC<WhyWebsiteSectionProps> = ({
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs transition-colors shadow-md shadow-emerald-500/20"
+            className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-400 to-blue-600 hover:from-sky-300 hover:to-blue-500 text-slate-950 font-bold text-xs transition-colors shadow-md shadow-sky-500/25"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-4 h-4 text-slate-950" />
             <span>Konsultasi Kebutuhan Bisnis</span>
           </a>
         </div>

@@ -45,25 +45,13 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* Col 1: Brand & Personal Entity (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center">
               <button 
                 onClick={() => handleNav('/')}
-                className="focus:outline-none text-left"
+                className="focus:outline-none text-left group"
               >
-                <BrandLogo size="md" />
+                <BrandLogo size="md" showText={true} />
               </button>
-<<<<<<< Updated upstream
-              <div>
-                <span className="text-base font-bold text-white block">
-                  {profile.name}
-                </span>
-                <span className="text-[11px] text-sky-400 flex items-center gap-1 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-                  <span>Web Developer &middot; Shofi Nasla</span>
-                </span>
-              </div>
-=======
->>>>>>> Stashed changes
             </div>
 
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">

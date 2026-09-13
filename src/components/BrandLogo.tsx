@@ -160,7 +160,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           </div>
 
           {/* Slogan */}
-          <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-slate-400 uppercase mt-0.5 hidden sm:block">
+          <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-slate-400 uppercase mt-0.5 block">
             BUILDING IDEAS INTO REAL SOLUTIONS
           </span>
         </div>

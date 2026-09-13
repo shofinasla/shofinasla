@@ -52,6 +52,7 @@ export const Footer: React.FC<FooterProps> = ({
               >
                 <BrandLogo size="md" />
               </button>
+<<<<<<< Updated upstream
               <div>
                 <span className="text-base font-bold text-white block">
                   {profile.name}
@@ -61,6 +62,8 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>Web Developer &middot; Shofi Nasla</span>
                 </span>
               </div>
+=======
+>>>>>>> Stashed changes
             </div>
 
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">

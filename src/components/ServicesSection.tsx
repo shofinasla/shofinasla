@@ -1,103 +1,148 @@
 import React from 'react';
-import { ArrowRight, Check, Code2, Gauge, LayoutDashboard, MessageSquare, Rocket } from 'lucide-react';
+import { 
+  Building2, 
+  Target, 
+  ShoppingBag, 
+  Cpu, 
+  Zap, 
+  CheckCircle2, 
+  ArrowRight, 
+  MessageSquare,
+  Sparkles
+} from 'lucide-react';
+import { ServiceItem } from '../types';
 
 interface ServicesSectionProps {
+  services: ServiceItem[];
   onNavigate: (sectionId: string) => void;
+  whatsappUrl: string;
 }
 
-const services = [
-  {
-    icon: LayoutDashboard,
-    title: 'Website Profesional',
-    description: 'Website company profile, personal brand, portfolio, atau landing page yang terlihat kredibel dan siap mendukung tujuan bisnis Anda.',
-    points: ['Desain modern dan responsive', 'Struktur halaman yang jelas', 'Siap diakses di semua perangkat']
-  },
-  {
-    icon: Code2,
-    title: 'Web App & Dashboard',
-    description: 'Aplikasi web yang membantu operasional bisnis menjadi lebih cepat, rapi, dan mudah dikembangkan seiring pertumbuhan Anda.',
-    points: ['Frontend React & TypeScript', 'Dashboard dan sistem internal', 'Integrasi API sesuai kebutuhan']
-  },
-  {
-    icon: Gauge,
-    title: 'Optimasi & Redesign',
-    description: 'Perbaikan website lama agar lebih cepat, mudah digunakan, lebih meyakinkan, dan memiliki pengalaman pengguna yang lebih baik.',
-    points: ['Audit performa dan UX', 'Optimasi mobile dan aksesibilitas', 'Perbaikan alur konversi']
-  }
-];
+export const ServicesSection: React.FC<ServicesSectionProps> = ({
+  services,
+  onNavigate,
+  whatsappUrl
+}) => {
+  const getServiceIcon = (name: string) => {
+    switch (name) {
+      case 'Building2':
+        return <Building2 className="w-5 h-5 text-indigo-400" />;
+      case 'Target':
+        return <Target className="w-5 h-5 text-rose-400" />;
+      case 'ShoppingBag':
+        return <ShoppingBag className="w-5 h-5 text-amber-400" />;
+      case 'Cpu':
+        return <Cpu className="w-5 h-5 text-cyan-400" />;
+      case 'Zap':
+        return <Zap className="w-5 h-5 text-emerald-400" />;
+      default:
+        return <Sparkles className="w-5 h-5 text-indigo-400" />;
+    }
+  };
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ onNavigate }) => {
   return (
-    <section id="services" className="relative border-y border-slate-900 bg-slate-900/30 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div className="space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 rounded-md border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-mono text-emerald-300">
-              <Rocket className="h-3.5 w-3.5" />
-              <span>JASA PEMBUATAN WEBSITE</span>
-            </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-100 sm:text-4xl">
-              Punya ide? Mari ubah menjadi website yang menghasilkan.
-            </h2>
-            <p className="max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base">
-              Saya membantu bisnis, profesional, dan organisasi membangun website yang profesional, cepat, dan mudah dipercaya oleh pelanggan.
-            </p>
-            <button
-              type="button"
-              onClick={() => onNavigate('contact')}
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition-colors hover:bg-emerald-400"
-            >
-              <MessageSquare className="h-4 w-4" />
-              Konsultasi Gratis
-              <ArrowRight className="h-4 w-4" />
-            </button>
+    <section id="services" className="py-20 bg-slate-950 relative border-b border-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="max-w-3xl text-left space-y-4 mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>SOLUSI & LAYANAN TERBAIK</span>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <article key={service.title} className="flex h-full flex-col rounded-2xl border border-slate-800 bg-slate-950/70 p-5 text-left transition-colors hover:border-indigo-500/40">
-                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-indigo-500/20 bg-indigo-500/10 text-indigo-300">
-                    <Icon className="h-5 w-5" />
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+            Layanan Pembuatan Website yang Disesuaikan dengan Tujuan Bisnis Anda.
+          </h2>
+
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Tidak ada solusi "satu ukuran untuk semua". Saya merancang setiap baris kode dan elemen visual agar selaras dengan target pasar dan tujuan spesifik usaha Anda.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((svc) => {
+            const icon = getServiceIcon(svc.iconName);
+
+            return (
+              <article
+                key={svc.id}
+                className={`rounded-2xl border p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 text-left relative ${
+                  svc.featured
+                    ? 'bg-slate-900/90 border-indigo-500/40 shadow-xl shadow-indigo-950/20 ring-1 ring-indigo-500/20'
+                    : 'bg-slate-900/40 border-slate-800 hover:border-slate-700'
+                }`}
+              >
+                {svc.featured && (
+                  <span className="absolute -top-3 right-5 px-3 py-0.5 rounded-full bg-indigo-600 text-[10px] font-bold tracking-wide uppercase text-white shadow-md">
+                    Paling Banyak Diminati
+                  </span>
+                )}
+
+                <div className="space-y-4">
+                  <div className="w-11 h-11 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center">
+                    {icon}
                   </div>
-                  <h3 className="text-base font-bold text-slate-100">{service.title}</h3>
-                  <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">{service.description}</p>
-                  <ul className="mt-5 space-y-2 border-t border-slate-800 pt-4">
-                    {service.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2 text-[11px] text-slate-300">
-                        <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              );
-            })}
-          </div>
+
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-100">
+                      {svc.title}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                      {svc.shortDesc}
+                    </p>
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t border-slate-800/80">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase block font-semibold">
+                      Yang Anda Dapatkan:
+                    </span>
+                    <ul className="space-y-1.5">
+                      {svc.deliverables.slice(0, 4).map((d, idx) => (
+                        <li key={idx} className="text-xs text-slate-300 flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 text-[11px] text-slate-400">
+                    <strong className="text-slate-300 block">Cocok untuk:</strong>
+                    <span>{svc.idealFor}</span>
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-slate-800/80">
+                  <a
+                    href={`https://wa.me/6285174241604?text=Halo%20Mas%20Ahmad%20Shofi,%20saya%20ingin%20konsultasi%20layanan%20${encodeURIComponent(svc.title)}.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-medium text-xs transition-colors"
+                  >
+                    <span>Konsultasikan Layanan Ini</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-indigo-400" />
+                  </a>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
-        <div className="mt-14 border-t border-slate-800 pt-10">
-          <div className="mb-6 space-y-2 text-left">
-            <p className="text-xs font-mono uppercase text-indigo-400">CARA KERJA</p>
-            <h3 className="text-2xl font-bold text-slate-100">Dari ide sampai website siap digunakan.</h3>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              ['01', 'Konsultasi', 'Kita membahas tujuan, target pengguna, fitur, dan kebutuhan bisnis Anda.'],
-              ['02', 'Rancang & Bangun', 'Saya menyusun struktur, tampilan, dan sistem website sesuai prioritas.'],
-              ['03', 'Review & Launch', 'Website diuji, disempurnakan, lalu dipublikasikan agar siap digunakan.']
-            ].map(([number, title, description]) => (
-              <div key={number} className="flex gap-4 border-l border-slate-700 pl-4 text-left">
-                <span className="font-mono text-sm font-bold text-emerald-400">{number}</span>
-                <div>
-                  <h4 className="text-sm font-bold text-slate-100">{title}</h4>
-                  <p className="mt-1 text-xs leading-relaxed text-slate-400">{description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Custom Request Callout */}
+        <div className="mt-12 text-center">
+          <p className="text-xs text-slate-400">
+            Punya kebutuhan spesifik yang belum tercantum di atas?{' '}
+            <button
+              onClick={() => onNavigate('contact')}
+              className="text-indigo-400 hover:underline font-semibold"
+            >
+              Hubungi saya untuk diskusi teknis khusus &rarr;
+            </button>
+          </p>
         </div>
+
       </div>
     </section>
   );

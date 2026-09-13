@@ -1,324 +1,165 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { 
-  Sparkles, 
-  MapPin, 
-  Mail, 
-  Check, 
-  Copy, 
   ArrowRight, 
-  Terminal, 
-  Code2, 
-  ExternalLink,
-  Github,
-  Linkedin,
-  FileText,
-  Cpu
+  MessageSquare, 
+  CheckCircle2, 
+  Zap, 
+  Smartphone, 
+  Search, 
+  ShieldCheck,
+  Building2,
+  Sparkles,
+  ArrowUpRight
 } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface HeroProps {
   profile: ProfileData;
   onNavigate: (sectionId: string) => void;
-  onOpenResume: () => void;
-  onOpenTerminal: () => void;
+  onOpenResume?: () => void;
+  onOpenTerminal?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   profile,
-  onNavigate,
-  onOpenResume,
-  onOpenTerminal
+  onNavigate
 }) => {
-  const [copied, setCopied] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [profileImageFailed, setProfileImageFailed] = useState(false);
-  const touchStartX = useRef<number | null>(null);
-
-  const slides = [
-    {
-      eyebrow: 'WEBSITE UNTUK BISNIS YANG INGIN TUMBUH',
-      title: <>Saya membantu Anda memiliki <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-300">website profesional</span> yang berkembang bersama bisnis.</>,
-      description: 'Saya merancang dan membangun website modern untuk membantu bisnis tampil lebih kredibel, menjangkau lebih banyak orang, dan mendapatkan peluang baru.',
-      primaryAction: 'Lihat Layanan Saya'
-    },
-    {
-      eyebrow: 'UBAH PENGUNJUNG MENJADI PELANGGAN',
-      title: <>Website yang bukan hanya indah, tetapi juga <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-indigo-400">mendukung hasil bisnis.</span></>,
-      description: 'Bangun landing page atau website company profile dengan pesan yang jelas, struktur yang meyakinkan, dan pengalaman pengguna yang nyaman.',
-      primaryAction: 'Mulai Konsultasi'
-    },
-    {
-      eyebrow: 'DIBANGUN SESUAI KEBUTUHAN ANDA',
-      title: <>Punya ide? Mari wujudkan menjadi <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-indigo-300 to-purple-400">produk digital.</span></>,
-      description: 'Dari konsep awal sampai siap online, saya membantu Anda membangun website yang cepat, responsive, dan mudah dikembangkan.',
-      primaryAction: 'Diskusikan Ide Anda'
-    }
-  ];
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % slides.length);
-    }, 5000);
-
-    return () => window.clearInterval(timer);
-  }, [slides.length]);
-
-  const changeSlide = (direction: number) => {
-    setActiveSlide((current) => (current + direction + slides.length) % slides.length);
-  };
-
-  const handleTouchStart = (event: React.TouchEvent) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
-  };
-
-  const handleTouchEnd = (event: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-
-    const distance = event.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(distance) > 50) changeSlide(distance < 0 ? 1 : -1);
-    touchStartX.current = null;
-  };
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(profile.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <section
       id="about"
-      className="relative overflow-hidden pt-32 pb-20"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      aria-label="Layanan pembuatan website"
+      className="relative overflow-hidden pt-32 pb-16 lg:pt-36 lg:pb-24 border-b border-slate-900"
+      aria-label="Jasa Pembuatan Website Profesional"
     >
-      {/* Background Decorative Gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 w-[300px] h-[250px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Background Decorative Lighting */}
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[700px] h-[360px] bg-gradient-to-tr from-indigo-600/15 via-purple-600/10 to-cyan-500/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute -top-10 right-10 w-[300px] h-[250px] bg-emerald-500/10 rounded-full blur-[110px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        {/* Main Hero Header */}
+        <div className="max-w-3xl mx-auto text-center space-y-6">
           
-          {/* Left Column: Bio & Calls to Action */}
-          <div className="lg:col-span-7 space-y-6 text-left" aria-live="polite">
-            {/* Status & Identity Chip */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span>{profile.status}</span>
-              </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs font-mono text-indigo-300">
-                <span>@{profile.username}</span>
-              </div>
+          {/* Eyebrow badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-xs font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <span>Jasa Pembuatan Website Profesional & Modern</span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-100 tracking-tight leading-[1.15]">
+            Website Profesional yang Mengubah Pengunjung Menjadi{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-300 to-emerald-400">
+              Pelanggan Nyata.
+            </span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+            Halo, saya <span className="font-semibold text-white">{profile.name}</span>. Saya membantu pemilik bisnis, UMKM, dan perusahaan membangun website berkelas yang berkecepatan tinggi, mobile-friendly, terindeks Google, dan dirancang khusus untuk meningkatkan kredibilitas serta penjualan.
+          </p>
+
+          {/* Value points grid */}
+          <div className="pt-2 pb-2 grid grid-cols-2 sm:grid-cols-4 gap-3 text-left max-w-2xl mx-auto">
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <Zap className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="text-xs font-medium text-slate-300">Loading &lt; 1.5 Detik</span>
             </div>
-
-            {/* Main Headline */}
-            <div key={activeSlide} className="space-y-2 animate-fadeIn">
-              <p className="mb-3 text-xs font-mono font-semibold tracking-wider text-indigo-300">
-                {slides[activeSlide].eyebrow}
-              </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 leading-tight">
-                {slides[activeSlide].title}
-              </h1>
-              <p className="text-lg sm:text-xl font-medium text-slate-300 flex items-center gap-2">
-                <Code2 className="w-5 h-5 text-indigo-400" />
-                <span>{profile.name} · {profile.title}</span>
-              </p>
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <Smartphone className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span className="text-xs font-medium text-slate-300">100% Mobile Ready</span>
             </div>
-
-            {/* Bio paragraph */}
-            <p className="text-slate-400 text-base leading-relaxed max-w-2xl">
-              {slides[activeSlide].description}
-            </p>
-
-            {/* Quick Metadata list */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-slate-400 font-mono pt-1">
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-indigo-400" />
-                <span>{profile.location}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Github className="w-3.5 h-3.5 text-slate-400" />
-                <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="hover:text-indigo-300 transition-colors">
-                  github.com/{profile.username}
-                </a>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-indigo-400" />
-                <a href={`mailto:${profile.email}`} className="hover:text-indigo-300 transition-colors">
-                  {profile.email}
-                </a>
-              </div>
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <Search className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="text-xs font-medium text-slate-300">SEO Ramah Google</span>
             </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-4">
-              <button
-                id="hero-btn-explore-projects"
-                onClick={() => onNavigate(activeSlide === 0 ? 'services' : 'contact')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm shadow-md shadow-indigo-600/30 hover:shadow-indigo-600/40 transition-all duration-200"
-              >
-                <span>{slides[activeSlide].primaryAction}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                id="hero-btn-consultation"
-                onClick={() => onNavigate('contact')}
-                className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-md shadow-emerald-500/20 transition-all duration-200 hover:bg-emerald-400"
-              >
-                <Mail className="h-4 w-4" />
-                <span>Konsultasi Gratis</span>
-              </button>
-
-              <button
-                id="hero-btn-copy-email"
-                onClick={handleCopyEmail}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700/80 font-mono text-xs transition-all duration-200"
-                title="Copy Email Address"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                <span>{copied ? 'Copied Email!' : profile.email}</span>
-              </button>
-
-              <button
-                id="hero-btn-resume"
-                onClick={onOpenResume}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-indigo-300 hover:text-indigo-200 border border-indigo-500/30 font-medium text-xs transition-all duration-200"
-              >
-                <FileText className="w-3.5 h-3.5 text-indigo-400" />
-                <span>View Resume & Bio</span>
-              </button>
-            </div>
-
-            <div className="flex items-center gap-3 pt-1" aria-label="Kontrol slider">
-              <button
-                type="button"
-                onClick={() => changeSlide(-1)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-300 transition-colors hover:border-indigo-400 hover:text-white"
-                aria-label="Slide sebelumnya"
-              >
-                <ArrowRight className="h-4 w-4 rotate-180" />
-              </button>
-              <div className="flex items-center gap-1.5" role="tablist" aria-label="Pilih slide">
-                {slides.map((slide, index) => (
-                  <button
-                    key={slide.eyebrow}
-                    type="button"
-                    onClick={() => setActiveSlide(index)}
-                    className={`h-1.5 rounded-full transition-all ${index === activeSlide ? 'w-8 bg-indigo-400' : 'w-2 bg-slate-700 hover:bg-slate-500'}`}
-                    role="tab"
-                    aria-selected={index === activeSlide}
-                    aria-label={`Tampilkan slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => changeSlide(1)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-300 transition-colors hover:border-indigo-400 hover:text-white"
-                aria-label="Slide berikutnya"
-              >
-                <ArrowRight className="h-4 w-4" />
-              </button>
-              <span className="text-[11px] font-mono text-slate-500">Geser untuk melihat</span>
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <ShieldCheck className="w-4 h-4 text-indigo-400 shrink-0" />
+              <span className="text-xs font-medium text-slate-300">Garansi 30 Hari</span>
             </div>
           </div>
 
-          {/* Right Column: Interactive GitHub Profile Card */}
-          <div className="lg:col-span-5">
-            <div className="relative group">
-              {/* Outer Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition duration-500" />
-              
-              {/* Profile Card Container */}
-              <div className="relative bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-5">
-                {/* Header bar */}
-                <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
-                    <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                    <span className="text-xs text-slate-400 font-mono ml-2">shofinasla/README.md</span>
-                  </div>
-                  <button 
-                    onClick={onOpenTerminal}
-                    className="flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-emerald-400 transition-colors"
-                  >
-                    <Terminal className="w-3 h-3" />
-                    <span>Launch CLI</span>
-                  </button>
-                </div>
+          {/* Action Buttons */}
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <a
+              id="hero-whatsapp-primary"
+              href={profile.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-xl shadow-emerald-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <MessageSquare className="w-4 h-4" />
+              <span>Konsultasi Website Sekarang (Gratis)</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
 
-                <div className="flex items-center gap-4 border-b border-slate-800/80 pb-5">
-                  <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-indigo-400/40 bg-gradient-to-br from-indigo-500/30 to-cyan-400/20 text-lg font-bold text-indigo-200 shadow-lg shadow-indigo-500/10">
-                    {!profileImageFailed && (
-                      <img
-                        src={profile.avatarUrl}
-                        alt={`Foto profil ${profile.name}`}
-                        className="absolute inset-0 h-full w-full object-cover"
-                        onError={() => setProfileImageFailed(true)}
-                      />
-                    )}
-                    <span aria-hidden="true">ASN</span>
-                  </div>
-                  <div className="min-w-0 text-left">
-                    <p className="text-sm font-bold text-slate-100">{profile.name}</p>
-                    <p className="mt-1 text-[11px] leading-relaxed text-slate-400">
-                      Pemilik &amp; developer website ini
-                    </p>
-                  </div>
-                </div>
-
-                {/* Markdown snippet representation */}
-                <div className="space-y-3 font-mono text-xs">
-                  <div className="p-3.5 bg-slate-950/70 rounded-xl border border-slate-800/60 space-y-2 text-slate-300">
-                    <div className="text-indigo-300 font-semibold flex items-center gap-1.5">
-                      <span>👋 Hi, I’m {profile.name} (@{profile.username})</span>
-                    </div>
-                    <div className="text-slate-400 text-[11px] leading-relaxed space-y-1">
-                      <p><span className="text-emerald-400">🌱 Learning:</span> {profile.learning[0]}</p>
-                      <p><span className="text-purple-400">💞️ Collaborating:</span> {profile.collaboratingOn[0]}</p>
-                      <p><span className="text-cyan-400">📫 Reach out:</span> {profile.email}</p>
-                      <p><span className="text-amber-400">📍 Based in:</span> {profile.location}</p>
-                    </div>
-                  </div>
-
-                  {/* Highlights Grid */}
-                  <div className="grid grid-cols-2 gap-2 pt-1">
-                    <div className="bg-slate-950/50 p-2.5 rounded-lg border border-slate-800/40">
-                      <span className="text-[10px] text-slate-500 block uppercase font-sans font-medium">Core Stack</span>
-                      <span className="text-xs font-medium text-slate-200">React • TS • Node</span>
-                    </div>
-                    <div className="bg-slate-950/50 p-2.5 rounded-lg border border-slate-800/40">
-                      <span className="text-[10px] text-slate-500 block uppercase font-sans font-medium">Repository</span>
-                      <span className="text-xs font-medium text-slate-200">{profile.username}/{profile.username}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Footer action */}
-                <div className="pt-2 flex items-center justify-between text-xs">
-                  <span className="text-slate-400">GitHub Profile Active</span>
-                  <a
-                    href={profile.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 font-medium"
-                  >
-                    <span>github.com/{profile.username}</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-              </div>
-            </div>
+            <button
+              id="hero-see-portfolio"
+              onClick={() => onNavigate('clients')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-medium text-sm border border-slate-700/80 transition-all"
+            >
+              <span>Lihat Portofolio Klien Nyata</span>
+              <ArrowUpRight className="w-4 h-4 text-slate-400" />
+            </button>
           </div>
 
+          <p className="text-[12px] text-slate-400 pt-1">
+            ⚡ Konsultasi santai & transparan. Tanpa komitmen apapun sebelum Anda yakin.
+          </p>
         </div>
+
+        {/* Real Client Trust Strip */}
+        <div className="mt-14 pt-8 border-t border-slate-900/90 max-w-4xl mx-auto">
+          <div className="text-center mb-4">
+            <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+              Dipercaya Oleh Bisnis & Klien Nyata:
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <button
+              onClick={() => onNavigate('clients')}
+              className="group p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800/80 hover:border-indigo-500/40 transition-all text-left flex items-center justify-between"
+            >
+              <div>
+                <span className="text-[11px] font-mono text-indigo-400 block font-semibold">TRAVEL & EVENT</span>
+                <span className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">
+                  CV. Fusena Jaya
+                </span>
+                <span className="text-[11px] text-slate-400 block">Company Profile & Booking</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-indigo-400 transition-colors transform group-hover:translate-x-1" />
+            </button>
+
+            <button
+              onClick={() => onNavigate('clients')}
+              className="group p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800/80 hover:border-emerald-500/40 transition-all text-left flex items-center justify-between"
+            >
+              <div>
+                <span className="text-[11px] font-mono text-emerald-400 block font-semibold">CUSTOM APPAREL</span>
+                <span className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">
+                  Paradise Sablon
+                </span>
+                <span className="text-[11px] text-slate-400 block">Katalog & Portofolio Sablon</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition-colors transform group-hover:translate-x-1" />
+            </button>
+
+            <button
+              onClick={() => onNavigate('clients')}
+              className="group p-4 rounded-xl bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800/80 hover:border-cyan-500/40 transition-all text-left flex items-center justify-between"
+            >
+              <div>
+                <span className="text-[11px] font-mono text-cyan-400 block font-semibold">B2B SEAFOOD EXPORT</span>
+                <span className="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">
+                  SHRIMORA
+                </span>
+                <span className="text-[11px] text-slate-400 block">Corporate Web & Cold Chain</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-colors transform group-hover:translate-x-1" />
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
   );

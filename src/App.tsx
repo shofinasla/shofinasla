@@ -1,26 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { RealClientsSection } from './components/RealClientsSection';
+import { WhyWebsiteSection } from './components/WhyWebsiteSection';
 import { ServicesSection } from './components/ServicesSection';
-import { ProjectShowcase } from './components/ProjectShowcase';
-import { SkillsSection } from './components/SkillsSection';
-import { ExperienceSection } from './components/ExperienceSection';
+import { ProcessSection } from './components/ProcessSection';
+import { WhyChooseMeSection } from './components/WhyChooseMeSection';
+import { CostEstimatorSection } from './components/CostEstimatorSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
+import { FAQSection } from './components/FAQSection';
+import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { InteractiveTerminal } from './components/InteractiveTerminal';
-import { ResumeModal } from './components/ResumeModal';
-import { initialProfile, initialProjects, initialSkillCategories, initialExperience } from './data/defaultProfile';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+
+import { 
+  initialProfile, 
+  realClientCaseStudies, 
+  detailedServices, 
+  frequentlyAskedQuestions, 
+  clientTestimonials 
+} from './data/defaultProfile';
 import { ProfileData } from './types';
 
 export function App() {
   const [profile] = useState<ProfileData>(initialProfile);
   const [activeSection, setActiveSection] = useState<string>('about');
-  const [isResumeModalOpen, setIsResumeModalOpen] = useState<boolean>(false);
-  const [isTerminalOpen, setIsTerminalOpen] = useState<boolean>(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
-    const sections = ['about', 'services', 'projects', 'skills', 'experience', 'contact']
+    const sectionIds = [
+      'about',
+      'clients',
+      'why-website',
+      'services',
+      'process',
+      'calculator',
+      'faq',
+      'developer-bio',
+      'contact'
+    ];
+
+    const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
 
@@ -34,7 +54,7 @@ export function App() {
           setActiveSection(visibleSection.target.id);
         }
       },
-      { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+      { rootMargin: '-20% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75] }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -57,56 +77,82 @@ export function App() {
         profile={profile}
         activeSection={activeSection}
         onNavigate={scrollToSection}
-        onOpenResume={() => setIsResumeModalOpen(true)}
-        onToggleTerminal={() => setIsTerminalOpen(!isTerminalOpen)}
-        isTerminalOpen={isTerminalOpen}
-        theme={theme}
-        onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       />
 
-      {/* Main Content Area */}
+      {/* Main Content Sections */}
       <main className="flex-grow">
+        
+        {/* 1. Hero Section (5-10s clarity, who, what, value, CTA) */}
         <Hero
           profile={profile}
           onNavigate={scrollToSection}
-          onOpenResume={() => setIsResumeModalOpen(true)}
-          onOpenTerminal={() => setIsTerminalOpen(true)}
         />
 
-        <ServicesSection onNavigate={scrollToSection} />
+        {/* 2. Real Client Case Studies (CV. Fusena Jaya, Paradise Sablon, SHRIMORA) */}
+        <RealClientsSection
+          clients={realClientCaseStudies}
+          whatsappNumber={profile.whatsappNumber}
+        />
 
-        <ProjectShowcase projects={initialProjects} />
+        {/* 3. Why Business Needs a Website (Pain points & Digital Real Estate) */}
+        <WhyWebsiteSection
+          onNavigate={scrollToSection}
+          whatsappUrl={profile.whatsappUrl}
+        />
 
-        <SkillsSection categories={initialSkillCategories} />
+        {/* 4. Services Section (Company Profile, Landing Page, Catalog, Web App, Redesign) */}
+        <ServicesSection
+          services={detailedServices}
+          onNavigate={scrollToSection}
+          whatsappUrl={profile.whatsappUrl}
+        />
 
-        <ExperienceSection experience={initialExperience} />
+        {/* 5. Transparent 4-Step Process */}
+        <ProcessSection
+          onNavigate={scrollToSection}
+          whatsappUrl={profile.whatsappUrl}
+        />
 
-        <ContactSection profile={profile} />
+        {/* 6. Why Choose Ahmad Shofi Nasla (Value Proposition) */}
+        <WhyChooseMeSection />
+
+        {/* 7. Interactive Cost & Timeline Estimator */}
+        <CostEstimatorSection
+          whatsappNumber={profile.whatsappNumber}
+        />
+
+        {/* 8. Real Client Testimonials */}
+        <TestimonialsSection
+          testimonials={clientTestimonials}
+        />
+
+        {/* 9. Frequently Asked Questions (FAQ) */}
+        <FAQSection
+          faqs={frequentlyAskedQuestions}
+          whatsappUrl={profile.whatsappUrl}
+        />
+
+        {/* 10. About Developer & Professional Credibility */}
+        <AboutSection
+          profile={profile}
+        />
+
+        {/* 11. Final High-Conversion Contact Section */}
+        <ContactSection
+          profile={profile}
+        />
+
       </main>
 
       {/* Footer */}
       <Footer
         profile={profile}
-        onOpenTerminal={() => setIsTerminalOpen(true)}
+        onNavigate={scrollToSection}
       />
 
-      {/* Interactive Terminal Drawer/Widget */}
-      <InteractiveTerminal
-        isOpen={isTerminalOpen}
-        onClose={() => setIsTerminalOpen(false)}
-        profile={profile}
-        projects={initialProjects}
-        skills={initialSkillCategories}
-      />
-
-      {/* Developer Resume & Bio Modal (Read-Only) */}
-      <ResumeModal
-        isOpen={isResumeModalOpen}
-        onClose={() => setIsResumeModalOpen(false)}
-        profile={profile}
-        projects={initialProjects}
-        skills={initialSkillCategories}
-        experience={initialExperience}
+      {/* Floating WhatsApp Quick-Connect Button */}
+      <FloatingWhatsApp
+        whatsappUrl={profile.whatsappUrl}
       />
 
     </div>

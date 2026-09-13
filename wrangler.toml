@@ -1,6 +1,9 @@
 name = "ahmad"
 main = "worker.js"
-compatibility_date = "2024-01-01"
-
-# Workers.dev domain: ahmad.shofinasla.workers.dev
+compatibility_date = "2026-09-13"
 workers_dev = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"

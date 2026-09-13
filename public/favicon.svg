@@ -1,0 +1,35 @@
+<svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="asnCyanBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="45%" stop-color="#00A3FF" />
+      <stop offset="100%" stop-color="#0066FF" />
+    </linearGradient>
+    <linearGradient id="asnDeepBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066FF" />
+      <stop offset="60%" stop-color="#0044CC" />
+      <stop offset="100%" stop-color="#0A2558" />
+    </linearGradient>
+    <linearGradient id="asnWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="70%" stop-color="#F1F5F9" />
+      <stop offset="100%" stop-color="#CBD5E1" />
+    </linearGradient>
+  </defs>
+  <!-- LETTER 'A' -->
+  <path d="M 12 136 L 44 80 L 68 80 L 32 136 Z" fill="url(#asnCyanBlue)" />
+  <path d="M 44 80 L 64 42 L 86 42 L 68 80 Z" fill="#0284C7" />
+  <path d="M 64 42 L 78 18 L 102 18 L 76 68 Z" fill="url(#asnWhite)" />
+  <path d="M 76 68 L 102 18 L 126 62 L 104 100 Z" fill="url(#asnWhite)" />
+  <path d="M 52 92 L 68 80 L 96 98 L 84 114 Z" fill="url(#asnDeepBlue)" opacity="0.8" />
+  <!-- LETTER 'S' -->
+  <path d="M 94 44 C 94 22, 122 18, 144 18 C 160 18, 172 26, 172 38 L 148 44 C 148 34, 136 32, 126 32 C 114 32, 110 38, 110 44 C 110 54, 124 58, 140 64 L 146 66 C 166 74, 176 86, 176 102 C 176 128, 146 138, 122 138 C 98 138, 86 126, 86 112 L 108 108 C 108 118, 118 122, 130 122 C 142 122, 150 116, 150 106 C 150 96, 138 90, 122 84 L 114 80 C 98 72, 94 60, 94 44 Z" fill="url(#asnCyanBlue)" />
+  <path d="M 94 44 C 94 22, 122 18, 144 18 L 152 30 C 134 30, 116 34, 116 46 C 116 52, 122 56, 134 60 L 118 72 C 102 62, 94 54, 94 44 Z" fill="url(#asnWhite)" />
+  <path d="M 122 84 L 140 92 C 148 96, 150 102, 150 106 C 150 116, 142 122, 130 122 C 118 122, 108 118, 108 108 L 86 112 C 86 126, 98 138, 122 138 C 146 138, 176 128, 176 102 C 176 86, 166 74, 146 66 L 122 84 Z" fill="url(#asnDeepBlue)" />
+  <path d="M 116 68 L 146 66 C 156 70, 164 78, 166 88 L 142 90 C 138 82, 128 76, 116 68 Z" fill="#00A3FF" />
+  <!-- LETTER 'N' -->
+  <path d="M 166 40 L 186 40 L 186 136 L 166 136 Z" fill="url(#asnDeepBlue)" />
+  <path d="M 166 40 L 194 40 L 226 124 L 202 124 Z" fill="url(#asnWhite)" />
+  <path d="M 174 52 L 186 70 L 186 40 Z" fill="#051433" opacity="0.6" />
+  <path d="M 206 18 L 228 18 L 228 136 L 206 136 Z" fill="url(#asnCyanBlue)" />
+</svg>

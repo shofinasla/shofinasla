@@ -112,3 +112,33 @@ export interface TerminalCommand {
   description: string;
 }
 
+export interface BreadcrumbItem {
+  label: string;
+  url?: string;
+}
+
+export interface InsightArticle {
+  id: string;
+  slug: string;
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  category: 'Website' | 'SEO' | 'Digital Marketing' | 'E-Commerce' | 'AI';
+  readTime: string;
+  publishDate: string;
+  summary: string;
+  keyTakeaways: string[];
+  sections: {
+    heading: string;
+    subheading?: string;
+    paragraphs: string[];
+    bulletPoints?: string[];
+  }[];
+  relatedServiceId?: string;
+  relatedServiceUrl?: string;
+  relatedServiceName?: string;
+  relatedProjectId?: string;
+  relatedProjectUrl?: string;
+  relatedProjectName?: string;
+}
+

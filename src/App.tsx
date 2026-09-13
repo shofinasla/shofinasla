@@ -1,5 +1,14 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
+import { initialProfile, realClientCaseStudies, detailedServices, frequentlyAskedQuestions, clientTestimonials } from './data/defaultProfile';
+import { dedicatedServicesList } from './data/servicesData';
+import { insightArticles } from './data/insightsData';
+
+// Core Navigation and Layout Components
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+
+// Homepage Sections
 import { Hero } from './components/Hero';
 import { RealClientsSection } from './components/RealClientsSection';
 import { WhyWebsiteSection } from './components/WhyWebsiteSection';
@@ -11,89 +20,40 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { FAQSection } from './components/FAQSection';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
-import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { AboutPage } from './pages/AboutPage';
 
-import { 
-  initialProfile, 
-  realClientCaseStudies, 
-  detailedServices, 
-  frequentlyAskedQuestions, 
-  clientTestimonials 
-} from './data/defaultProfile';
-import { ProfileData } from './types';
+// Dedicated Architectural Pages
+import { AboutPage } from './pages/AboutPage';
+import { ServicesHubPage } from './pages/ServicesHubPage';
+import { ServiceDetailPage } from './pages/ServiceDetailPage';
+import { ProjectsHubPage } from './pages/ProjectsHubPage';
+import { CaseStudyDetailPage } from './pages/CaseStudyDetailPage';
+import { InsightsHubPage } from './pages/InsightsHubPage';
+import { InsightDetailPage } from './pages/InsightDetailPage';
 
 export function App() {
-  const [profile] = useState<ProfileData>(initialProfile);
-  const [activeSection, setActiveSection] = useState<string>('about');
-  
-  // URL routing state
+  const [profile] = useState(initialProfile);
+  const [activeSection, setActiveSection] = useState('about');
+
+  // SPA Route State based on window.location.pathname
   const [currentPath, setCurrentPath] = useState<string>(() => {
     if (typeof window !== 'undefined') {
-      const p = window.location.pathname.replace(/\/+$/, '') || '/';
-      return p;
+      return window.location.pathname || '/';
     }
     return '/';
   });
 
-  const currentPage = useMemo<'home' | 'about'>(() => {
-    return currentPath === '/about' ? 'about' : 'home';
-  }, [currentPath]);
-
-  // Handle browser back / forward navigation
+  // Listen to browser Back / Forward buttons
   useEffect(() => {
     const handlePopState = () => {
-      const p = window.location.pathname.replace(/\/+$/, '') || '/';
-      setCurrentPath(p);
+      setCurrentPath(window.location.pathname || '/');
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Update SEO metadata & title dynamically based on current page
-  useEffect(() => {
-    const updateMetaTag = (selector: string, attr: string, value: string) => {
-      let elem = document.querySelector(selector);
-      if (!elem) {
-        elem = document.createElement(selector.startsWith('link') ? 'link' : 'meta');
-        if (selector.includes('property=')) {
-          const prop = selector.match(/property="([^"]+)"/)?.[1];
-          if (prop) elem.setAttribute('property', prop);
-        } else if (selector.includes('name=')) {
-          const name = selector.match(/name="([^"]+)"/)?.[1];
-          if (name) elem.setAttribute('name', name);
-        } else if (selector.includes('rel=')) {
-          const rel = selector.match(/rel="([^"]+)"/)?.[1];
-          if (rel) elem.setAttribute('rel', rel);
-        }
-        document.head.appendChild(elem);
-      }
-      elem.setAttribute(attr, value);
-    };
-
-    if (currentPage === 'about') {
-      document.title = "About Ahmad Shofi Nasla — Web Developer";
-      updateMetaTag('meta[name="description"]', 'content', 'Kenali Ahmad Shofi Nasla, Web Developer yang membantu bisnis dan UMKM membangun website profesional, cepat, responsive, dan berorientasi tujuan bisnis nyata.');
-      updateMetaTag('link[rel="canonical"]', 'href', 'https://ahmad.shofinasla.workers.dev/about');
-      updateMetaTag('meta[property="og:title"]', 'content', 'About Ahmad Shofi Nasla — Web Developer');
-      updateMetaTag('meta[property="og:description"]', 'content', 'Kenali Ahmad Shofi Nasla, Web Developer yang membantu bisnis membangun kehadiran digital profesional, berkecepatan tinggi, dan berorientasi konversi.');
-      updateMetaTag('meta[property="og:url"]', 'content', 'https://ahmad.shofinasla.workers.dev/about');
-      updateMetaTag('meta[property="og:type"]', 'content', 'profile');
-    } else {
-      document.title = "Jasa Pembuatan Website Profesional | Ahmad Shofi Nasla";
-      updateMetaTag('meta[name="description"]', 'content', 'Jasa pembuatan website profesional, company profile, landing page konversi tinggi, dan aplikasi web untuk UMKM dan bisnis modern oleh Ahmad Shofi Nasla.');
-      updateMetaTag('link[rel="canonical"]', 'href', 'https://ahmad.shofinasla.workers.dev/');
-      updateMetaTag('meta[property="og:title"]', 'content', 'Jasa Pembuatan Website Profesional | Ahmad Shofi Nasla');
-      updateMetaTag('meta[property="og:description"]', 'content', 'Bantu bisnis Anda naik kelas dengan website profesional berkecepatan tinggi, mobile-friendly, terindeks Google, dan dirancang khusus untuk menghasilkan omzet.');
-      updateMetaTag('meta[property="og:url"]', 'content', 'https://ahmad.shofinasla.workers.dev/');
-      updateMetaTag('meta[property="og:type"]', 'content', 'website');
-    }
-  }, [currentPage]);
-
   // IntersectionObserver for homepage scrollspy
   useEffect(() => {
-    if (currentPage !== 'home') return;
+    if (currentPath !== '/') return;
 
     const sectionIds = [
       'about',
@@ -126,7 +86,7 @@ export function App() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [currentPage]);
+  }, [currentPath]);
 
   // Navigate to hash section on home page
   const scrollToSection = (sectionId: string) => {
@@ -137,15 +97,13 @@ export function App() {
     }
   };
 
-  // Navigate between pages (/ and /about)
+  // Universal Navigation Handler across the target architecture
   const navigateToPage = (path: string, hash?: string) => {
     const fullUrl = path + (hash ? `#${hash}` : '');
     window.history.pushState({}, '', fullUrl);
     setCurrentPath(path);
 
-    if (path === '/about') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
+    if (path === '/') {
       if (hash) {
         setTimeout(() => {
           const elem = document.getElementById(hash);
@@ -154,7 +112,138 @@ export function App() {
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  // Route Resolver
+  const renderCurrentRoute = () => {
+    // 1. Root / Homepage
+    if (currentPath === '/' || currentPath === '') {
+      return (
+        <>
+          <Hero profile={profile} onNavigate={scrollToSection} />
+          <RealClientsSection clients={realClientCaseStudies} whatsappNumber={profile.whatsappNumber} />
+          <WhyWebsiteSection onNavigate={scrollToSection} whatsappUrl={profile.whatsappUrl} />
+          <ServicesSection services={detailedServices} onNavigate={scrollToSection} whatsappUrl={profile.whatsappUrl} />
+          <ProcessSection onNavigate={scrollToSection} whatsappUrl={profile.whatsappUrl} />
+          <WhyChooseMeSection />
+          <CostEstimatorSection whatsappNumber={profile.whatsappNumber} />
+          <TestimonialsSection testimonials={clientTestimonials} />
+          <FAQSection faqs={frequentlyAskedQuestions} whatsappUrl={profile.whatsappUrl} />
+          <AboutSection profile={profile} />
+          <ContactSection profile={profile} />
+        </>
+      );
+    }
+
+    // 2. /about - Personal Entity & Professional Profile
+    if (currentPath === '/about') {
+      return (
+        <AboutPage
+          profile={profile}
+          onNavigateHome={() => navigateToPage('/')}
+          onNavigateToSection={(sectionId) => navigateToPage('/', sectionId)}
+        />
+      );
+    }
+
+    // 3. /services - Services Hub
+    if (currentPath === '/services') {
+      return (
+        <ServicesHubPage
+          profile={profile}
+          onNavigatePage={navigateToPage}
+        />
+      );
+    }
+
+    // 4. /services/:slug - Dedicated Service Detail
+    if (currentPath.startsWith('/services/')) {
+      const slug = currentPath.replace('/services/', '');
+      const matchedService = dedicatedServicesList.find((s) => s.slug === slug);
+      if (matchedService) {
+        return (
+          <ServiceDetailPage
+            service={matchedService}
+            profile={profile}
+            onNavigatePage={navigateToPage}
+          />
+        );
+      }
+    }
+
+    // 5. /projects - Projects & Case Studies Hub
+    if (currentPath === '/projects') {
+      return (
+        <ProjectsHubPage
+          profile={profile}
+          onNavigatePage={navigateToPage}
+        />
+      );
+    }
+
+    // 6. /projects/:id - Case Study Detail
+    if (currentPath.startsWith('/projects/')) {
+      const id = currentPath.replace('/projects/', '');
+      const matchedCaseStudy = realClientCaseStudies.find((c) => c.id === id);
+      if (matchedCaseStudy) {
+        return (
+          <CaseStudyDetailPage
+            caseStudy={matchedCaseStudy}
+            profile={profile}
+            onNavigatePage={navigateToPage}
+          />
+        );
+      }
+    }
+
+    // 7. /insights - Insights Hub
+    if (currentPath === '/insights') {
+      return (
+        <InsightsHubPage
+          profile={profile}
+          onNavigatePage={navigateToPage}
+        />
+      );
+    }
+
+    // 8. /insights/:slug - Insight Article Detail
+    if (currentPath.startsWith('/insights/')) {
+      const slug = currentPath.replace('/insights/', '');
+      const matchedArticle = insightArticles.find((a) => a.slug === slug);
+      if (matchedArticle) {
+        return (
+          <InsightDetailPage
+            article={matchedArticle}
+            profile={profile}
+            onNavigatePage={navigateToPage}
+          />
+        );
+      }
+    }
+
+    // Fallback: Elegant 404 with return home button
+    return (
+      <div className="pt-32 pb-24 max-w-2xl mx-auto px-4 text-center space-y-6">
+        <span className="px-3 py-1 rounded-full bg-sky-950 text-sky-400 font-mono text-xs border border-sky-900/40">
+          404 &middot; Halaman Tidak Ditemukan
+        </span>
+        <h1 className="text-3xl font-extrabold text-white">
+          Halaman yang Anda Cari Tidak Tersedia
+        </h1>
+        <p className="text-slate-300 text-sm">
+          Alamat URL mungkin telah diperbarui atau dipindahkan ke struktur arsitektur baru.
+        </p>
+        <button
+          onClick={() => navigateToPage('/')}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs transition-all shadow-md"
+        >
+          Kembali ke Beranda Utama
+        </button>
+      </div>
+    );
   };
 
   return (
@@ -164,90 +253,20 @@ export function App() {
       <Navbar
         profile={profile}
         activeSection={activeSection}
-        currentPage={currentPage}
+        currentPath={currentPath}
         onNavigateSection={scrollToSection}
         onNavigatePage={navigateToPage}
       />
 
       {/* Main Content Area */}
       <main className="flex-grow">
-        {currentPage === 'about' ? (
-          /* Dedicated Professional Personal Profile Page */
-          <AboutPage
-            profile={profile}
-            onNavigateHome={() => navigateToPage('/')}
-            onNavigateToSection={(sectionId) => navigateToPage('/', sectionId)}
-          />
-        ) : (
-          /* Homepage: Business / Service Landing Page */
-          <>
-            {/* 1. Hero Section */}
-            <Hero
-              profile={profile}
-              onNavigate={scrollToSection}
-            />
-
-            {/* 2. Real Client Case Studies */}
-            <RealClientsSection
-              clients={realClientCaseStudies}
-              whatsappNumber={profile.whatsappNumber}
-            />
-
-            {/* 3. Why Business Needs a Website */}
-            <WhyWebsiteSection
-              onNavigate={scrollToSection}
-              whatsappUrl={profile.whatsappUrl}
-            />
-
-            {/* 4. Services Section */}
-            <ServicesSection
-              services={detailedServices}
-              onNavigate={scrollToSection}
-              whatsappUrl={profile.whatsappUrl}
-            />
-
-            {/* 5. Transparent 4-Step Process */}
-            <ProcessSection
-              onNavigate={scrollToSection}
-              whatsappUrl={profile.whatsappUrl}
-            />
-
-            {/* 6. Why Choose Ahmad Shofi Nasla */}
-            <WhyChooseMeSection />
-
-            {/* 7. Interactive Cost & Timeline Estimator */}
-            <CostEstimatorSection
-              whatsappNumber={profile.whatsappNumber}
-            />
-
-            {/* 8. Real Client Testimonials */}
-            <TestimonialsSection
-              testimonials={clientTestimonials}
-            />
-
-            {/* 9. Frequently Asked Questions (FAQ) */}
-            <FAQSection
-              faqs={frequentlyAskedQuestions}
-              whatsappUrl={profile.whatsappUrl}
-            />
-
-            {/* 10. About Developer Section on Homepage */}
-            <AboutSection
-              profile={profile}
-            />
-
-            {/* 11. Final High-Conversion Contact Section */}
-            <ContactSection
-              profile={profile}
-            />
-          </>
-        )}
+        {renderCurrentRoute()}
       </main>
 
-      {/* Universal Footer with Link to About */}
+      {/* Universal Footer with Full Architectural Sitemap Links */}
       <Footer
         profile={profile}
-        currentPage={currentPage}
+        currentPath={currentPath}
         onNavigateSection={scrollToSection}
         onNavigatePage={navigateToPage}
       />

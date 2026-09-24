@@ -101,6 +101,9 @@ export interface ProfileData {
   githubUrl: string;
   linkedinUrl: string;
   websiteUrl: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
+  tiktokUrl?: string;
   interests: string[];
   learning: string[];
   collaboratingOn: string[];

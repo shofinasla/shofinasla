@@ -76,7 +76,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
   const waMessage = encodeURIComponent(
     `Halo Mas Ahmad Shofi Nasla, saya tertarik konsultasi ${service.title} untuk bisnis saya.`
   );
-  const waUrl = `https://wa.me/6285174241604?text=${waMessage}`;
+  const waUrl = `https://wa.me/6288980863848?text=${waMessage}`;
 
   return (
     <div className="pt-24 pb-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">

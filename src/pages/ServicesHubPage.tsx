@@ -164,7 +164,7 @@ export const ServicesHubPage: React.FC<ServicesHubPageProps> = ({
                 </button>
 
                 <a
-                  href={`https://wa.me/6285174241604?text=${encodeURIComponent(`Halo Mas Ahmad Shofi Nasla, saya tertarik konsultasi ${service.title} untuk bisnis saya.`)}`}
+                  href={`https://wa.me/6288980863848?text=${encodeURIComponent(`Halo Mas Ahmad Shofi Nasla, saya tertarik konsultasi ${service.title} untuk bisnis saya.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-[11px] font-mono px-3 py-1.5 rounded-lg bg-[#0e172e] hover:bg-sky-950 text-slate-300 hover:text-white border border-sky-900/40 transition-colors"

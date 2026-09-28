@@ -116,7 +116,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
                 <div className="pt-6 mt-6 border-t border-sky-950">
                   <a
-                    href={`https://wa.me/6285174241604?text=Halo%20Mas%20Ahmad%20Shofi,%20saya%20ingin%20konsultasi%20layanan%20${encodeURIComponent(svc.title)}.`}
+                    href={`https://wa.me/6288980863848?text=Halo%20Mas%20Ahmad%20Shofi,%20saya%20ingin%20konsultasi%20layanan%20${encodeURIComponent(svc.title)}.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#0d1424] hover:bg-[#131c33] text-slate-200 hover:text-white font-medium text-xs border border-sky-900/40 hover:border-sky-500/40 transition-colors"

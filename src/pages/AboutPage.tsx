@@ -44,7 +44,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
   const handleDiscussProject = () => {
     window.open(
-      'https://wa.me/6285174241604?text=Halo%20Mas%20Shofi,%20saya%20telah%20membaca%20profil%20Anda%20di%20halaman%20About%20dan%20ingin%20berdiskusi%20tentang%20proyek%20website.',
+      'https://wa.me/6288980863848?text=Halo%20Mas%20Shofi,%20saya%20telah%20membaca%20profil%20Anda%20di%20halaman%20About%20dan%20ingin%20berdiskusi%20tentang%20proyek%20website.',
       '_blank',
       'noopener,noreferrer'
     );

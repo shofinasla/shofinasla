@@ -81,7 +81,7 @@ export const InsightDetailPage: React.FC<InsightDetailPageProps> = ({
   const waMessage = encodeURIComponent(
     `Halo Mas Ahmad Shofi Nasla, saya telah membaca artikel "${article.title}" dan ingin konsultasi website untuk bisnis saya.`
   );
-  const waUrl = `https://wa.me/6285174241604?text=${waMessage}`;
+  const waUrl = `https://wa.me/6288980863848?text=${waMessage}`;
 
   return (
     <div className="pt-24 pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">

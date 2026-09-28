@@ -356,6 +356,24 @@ export const initialProjects: Project[] = [
       'Ukuran bundle minified sangat ringan di bawah 15kb'
     ],
     date: '2025'
+  },
+  {
+    id: 'proj-edge-router',
+    title: 'EdgeGateway & Webhook Router',
+    description: 'Infrastruktur routing serverless terdistribusi di edge untuk webhook WhatsApp Business, caching dinamis, dan proteksi anti-spam.',
+    fullDescription: 'Arsitektur micro-services serverless berbasis Cloudflare Workers yang memproses jutaan request payload webhook secara asinkron dengan latensi sub-10ms global.',
+    category: 'Full Stack',
+    tags: ['Cloudflare Workers', 'TypeScript', 'Edge Cache', 'Webhooks', 'REST API'],
+    stars: 56,
+    forks: 18,
+    featured: false,
+    demoUrl: 'https://github.com/shofinasla',
+    githubUrl: 'https://github.com/shofinasla',
+    highlights: [
+      'Sub-10ms execution time di 300+ PoP edge network',
+      'Validasi signature cryptographic untuk payload webhook WhatsApp'
+    ],
+    date: '2026'
   }
 ];
 

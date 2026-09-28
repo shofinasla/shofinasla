@@ -79,7 +79,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
   const waUrl = `https://wa.me/6288980863848?text=${waMessage}`;
 
   return (
-    <div className="pt-24 pb-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="pt-6 sm:pt-8 pb-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
       <SEOHead
         title={service.metaTitle}
         description={service.metaDescription}
@@ -88,17 +88,18 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
         schema={schema}
       />
 
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb
-        items={[
-          { label: 'Layanan Jasa Website', url: '/services' },
-          { label: service.title }
-        ]}
-        onNavigate={(path) => onNavigatePage(path)}
-      />
+      {/* Top Navigation & Header Block */}
+      <div className="space-y-4 sm:space-y-5">
+        <Breadcrumb
+          items={[
+            { label: 'Layanan Jasa Website', url: '/services' },
+            { label: service.title }
+          ]}
+          onNavigate={(path) => onNavigatePage(path)}
+        />
 
-      {/* Header / Hero */}
-      <header className="space-y-6">
+        {/* Header / Hero */}
+        <header className="space-y-4 pt-1">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-950/80 border border-sky-500/30 text-sky-300 text-xs font-mono">
           <span>{service.badge}</span>
         </div>
@@ -136,6 +137,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
           </button>
         </div>
       </header>
+      </div>
 
       {/* Why Needed Section */}
       <section className="bg-[#0b1120] border border-sky-950/70 rounded-2xl p-6 sm:p-8 space-y-6">

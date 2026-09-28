@@ -51,7 +51,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-20 overflow-x-hidden">
+    <div className="pb-20 overflow-x-hidden">
       
       {/* ========================================================================= */}
       {/* 1. HERO SECTION                                                           */}

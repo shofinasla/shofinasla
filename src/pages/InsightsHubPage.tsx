@@ -49,7 +49,7 @@ export const InsightsHubPage: React.FC<InsightsHubPageProps> = ({
   };
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="pt-6 sm:pt-8 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
       <SEOHead
         title="Wawasan &amp; Panduan Website Bisnis | Ahmad Shofi Nasla"
         description="Pelajari strategi website bisnis, panduan technical SEO agar terindeks Google, dan digital presence untuk UMKM dari Ahmad Shofi Nasla, Web Developer."
@@ -58,14 +58,15 @@ export const InsightsHubPage: React.FC<InsightsHubPageProps> = ({
         schema={schema}
       />
 
-      {/* Breadcrumb */}
-      <Breadcrumb
-        items={[{ label: 'Wawasan & Panduan' }]}
-        onNavigate={(path) => onNavigatePage(path)}
-      />
+      {/* Top Navigation & Header Block */}
+      <div className="space-y-4 sm:space-y-5">
+        <Breadcrumb
+          items={[{ label: 'Wawasan & Panduan' }]}
+          onNavigate={(path) => onNavigatePage(path)}
+        />
 
-      {/* Hero Header */}
-      <header className="text-center max-w-3xl mx-auto space-y-4">
+        {/* Hero Header */}
+        <header className="text-center max-w-3xl mx-auto space-y-4 pt-1">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-950/70 border border-sky-500/30 text-sky-300 text-xs font-mono">
           <BookOpen className="w-3.5 h-3.5 text-sky-400" />
           <span>Topical Authority &middot; Wawasan Teruji</span>
@@ -96,6 +97,7 @@ export const InsightsHubPage: React.FC<InsightsHubPageProps> = ({
           ))}
         </div>
       </header>
+      </div>
 
       {/* Articles Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">

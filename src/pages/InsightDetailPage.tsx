@@ -84,7 +84,7 @@ export const InsightDetailPage: React.FC<InsightDetailPageProps> = ({
   const waUrl = `https://wa.me/6288980863848?text=${waMessage}`;
 
   return (
-    <div className="pt-24 pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="pt-6 sm:pt-8 pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
       <SEOHead
         title={article.metaTitle}
         description={article.metaDescription}
@@ -93,17 +93,18 @@ export const InsightDetailPage: React.FC<InsightDetailPageProps> = ({
         schema={schema}
       />
 
-      {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: 'Wawasan & Panduan', url: '/insights' },
-          { label: article.title }
-        ]}
-        onNavigate={(path) => onNavigatePage(path)}
-      />
+      {/* Top Navigation & Header Block */}
+      <div className="space-y-4 sm:space-y-5">
+        <Breadcrumb
+          items={[
+            { label: 'Wawasan & Panduan', url: '/insights' },
+            { label: article.title }
+          ]}
+          onNavigate={(path) => onNavigatePage(path)}
+        />
 
-      {/* Article Header */}
-      <header className="space-y-4 border-b border-sky-950/70 pb-8">
+        {/* Article Header */}
+        <header className="space-y-4 border-b border-sky-950/70 pb-6 pt-1">
         <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400">
           <span className="px-3 py-1 rounded-full bg-sky-950 text-sky-300 border border-sky-800/40 font-semibold">
             {article.category}
@@ -127,6 +128,7 @@ export const InsightDetailPage: React.FC<InsightDetailPageProps> = ({
           {article.summary}
         </p>
       </header>
+      </div>
 
       {/* Key Takeaways Box */}
       <section className="p-6 rounded-2xl bg-[#090f21] border border-sky-900/50 space-y-3">

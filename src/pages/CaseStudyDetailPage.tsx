@@ -77,7 +77,7 @@ export const CaseStudyDetailPage: React.FC<CaseStudyDetailPageProps> = ({
   const waUrl = `https://wa.me/6288980863848?text=${waMessage}`;
 
   return (
-    <div className="pt-24 pb-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="pt-6 sm:pt-8 pb-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
       <SEOHead
         title={`Studi Kasus: ${caseStudy.clientName} | Ahmad Shofi Nasla`}
         description={`Pelajari bagaimana Ahmad Shofi Nasla merancang dan mengembangkan website untuk ${caseStudy.clientName} (${caseStudy.industry}). Pendekatan arsitektur, tantangan, dan solusi bisnis.`}
@@ -86,17 +86,18 @@ export const CaseStudyDetailPage: React.FC<CaseStudyDetailPageProps> = ({
         schema={schema}
       />
 
-      {/* Breadcrumb Navigation */}
-      <Breadcrumb
-        items={[
-          { label: 'Portofolio & Studi Kasus', url: '/projects' },
-          { label: caseStudy.clientName }
-        ]}
-        onNavigate={(path) => onNavigatePage(path)}
-      />
+      {/* Top Navigation & Header Block */}
+      <div className="space-y-4 sm:space-y-5">
+        <Breadcrumb
+          items={[
+            { label: 'Portofolio & Studi Kasus', url: '/projects' },
+            { label: caseStudy.clientName }
+          ]}
+          onNavigate={(path) => onNavigatePage(path)}
+        />
 
-      {/* Header / Meta */}
-      <header className="space-y-6">
+        {/* Header / Meta */}
+        <header className="space-y-4 pt-1">
         <div className="flex flex-wrap items-center gap-3">
           <span className="px-3 py-1 rounded-full bg-sky-950/80 border border-sky-500/30 text-sky-300 text-xs font-mono">
             {caseStudy.category}
@@ -128,6 +129,7 @@ export const CaseStudyDetailPage: React.FC<CaseStudyDetailPageProps> = ({
           ))}
         </div>
       </header>
+      </div>
 
       {/* Challenge & Solution Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
